@@ -11,7 +11,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Times New Roman", Times, serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       scroll-behavior: smooth;
     }
 
@@ -19,6 +19,43 @@
       overflow-x: hidden;
       background-color: #004481; /* Fondo azul */
       color: #333;
+    }
+
+    /* ====== LOADER ====== */
+    .loader-container {
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .loader-logo {
+      width: 150px;
+      animation: fadeInOut 2s infinite ease-in-out;
+      margin-bottom: 20px;
+    }
+    @keyframes fadeInOut {
+      0%   { opacity: 0.4; }
+      50%  { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+    .loader {
+      border: 10px solid #f3f3f3;
+      border-top: 10px solid #004481;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     /* ====== ENCABEZADO ====== */
@@ -30,44 +67,22 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 20px;
-      flex-wrap: wrap;
     }
-
     .header-left {
       display: flex;
       align-items: center;
-      flex-direction: column; /* Hace que los elementos dentro se apilen en móviles */
-      width: 100%;
-      text-align: center;
     }
-
     .logo-bi {
       height: 50px;
-      margin-bottom: 10px;
     }
 
-    .whatsapp-btn {
-      background-color: #25D366 !important;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 4px;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      width: 200px;
-      margin-top: 10px;
-    }
-
+    /* ====== BOTONES DE ACCIÓN ====== */
     .action-buttons {
       display: flex;
       gap: 10px;
     }
-
     .action-buttons button {
-      background-color: #004481;
+      background-color: #004481; 
       color: #fff;
       border: none;
       padding: 10px 16px;
@@ -76,49 +91,234 @@
       font-size: 1rem;
       transition: all 0.3s ease;
     }
-
     .action-buttons button:hover {
       background-color: #0078d4;
       transform: scale(1.05);
     }
+    .whatsapp-btn {
+      background-color: #25D366 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      animation: float 2s infinite ease-in-out;
+    }
+    .whatsapp-btn span {
+      font-size: 1.2rem;
+    }
+    @keyframes float {
+      0%   { transform: translateY(0px); }
+      50%  { transform: translateY(-3px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* ====== CONTENEDOR PRINCIPAL ====== */
+    .main-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    /* ====== CARRUSEL (con crossfade y zoom suave) ====== */
+    .carousel-container {
+      width: 100%;
+      position: relative;
+      margin-bottom: 20px;
+      background-color: transparent;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    #carousel {
+      width: 100%;
+      height: 400px; /* Ajusta la altura a tu gusto */
+      position: relative;
+    }
+    /* Cada imagen se apila en posición absoluta */
+    #carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* para SVG sin recorte */
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;  /* la base es 0 */
+    }
+    /* Clases de transición */
+    .show {
+      z-index: 2; /* la que se está mostrando va por encima */
+      animation: fadeInZoom 1s forwards; /* Aparece con zoom in */
+    }
+    .hide {
+      z-index: 1; /* se queda debajo mientras se desvanece */
+      animation: fadeOutZoom 1s forwards; /* Desvanece con zoom out */
+    }
+
+    /* Keyframes para entrada */
+    @keyframes fadeInZoom {
+      0% {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Keyframes para salida */
+    @keyframes fadeOutZoom {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.05);
+      }
+    }
+
+    /* ====== PERFIL DEL EJECUTIVO ====== */
+    .executive-profile {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .profile-pic img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #004481;
+    }
+    .executive-info h1 {
+      color: #004481;
+      margin-bottom: 5px;
+      font-size: 1.5rem;
+    }
+    .executive-info p {
+      margin-bottom: 5px;
+    }
 
     /* ====== RESPONSIVO ====== */
     @media (max-width: 768px) {
-      .header-bi {
+      .executive-profile {
         flex-direction: column;
-        align-items: center;
-      }
-
-      .action-buttons {
-        flex-direction: column;
-        width: 100%;
         text-align: center;
-        align-items: center;
       }
-
-      .whatsapp-btn {
-        width: 90%;
-        max-width: 250px;
+      #carousel {
+        height: 600px; /* Ajusta en móviles si lo deseas */
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- ===== LOADER ===== -->
+  <div class="loader-container" id="loader">
+    <img src="img/LOGOBI.svg" alt="Logo Banco Industrial" class="loader-logo">
+    <div class="loader"></div>
+  </div>
+
   <!-- ===== ENCABEZADO ===== -->
   <header class="header-bi">
     <div class="header-left">
       <img src="img/LOGOBI.svg" alt="Logo Banco Industrial" class="logo-bi">
-      <button class="whatsapp-btn"
-        onclick="window.open('https://wa.me/50231663430?text=¡Hola!%20Quiero%20más%20información%20sobre%20los%20productos%20del%20Banco%20Industrial.', '_blank', 'noopener,noreferrer');">
-        <span>📞</span> WhatsApp
-      </button>
     </div>
     <div class="action-buttons">
       <button onclick="window.location.href='COTIZADOR.html'">Cotizador</button>
       <button onclick="window.location.href='CAPACITACION.html'">Capacitación</button>
+      <button 
+        class="whatsapp-btn"
+        onclick="window.open('https://wa.me/50231663430?text=¡Hola!%20Quiero%20más%20información%20sobre%20los%20productos%20del%20Banco%20Industrial.', '_blank', 'noopener,noreferrer');">
+        <span>📞</span> WhatsApp
+      </button>
     </div>
   </header>
 
+  <!-- ===== CONTENEDOR PRINCIPAL ===== -->
+  <main class="main-container">
+    <!-- CARRUSEL DE IMÁGENES PROMOCIONALES -->
+    <section class="carousel-container">
+      <div id="carousel"></div>
+    </section>
+
+    <!-- PERFIL DEL EJECUTIVO -->
+    <section class="executive-profile">
+      <div class="profile-pic">
+        <img
+          src="https://pps.whatsapp.net/v/t61.24694-24/425107398_491267650342082_6382262898382819345_n.jpg?ccb=11-4&oh=01_Q5AaIOQgOEpp_NsGmWB5HesYFnH-J5Wx22g8iCmsYRdIxVkN&oe=67B11455&_nc_sid=5e03e0&_nc_cat=101"
+          alt="Foto de Perfil">
+      </div>
+      <div class="executive-info">
+        <h1 id="exec-name">Edgar Fernando Ortiz</h1>
+        <p id="exec-position">Ejecutivo de Negocios/Banca Personal</p>
+        <p id="exec-contact">
+          Contacto: <a href="mailto:efortiz@bi.com.gt">efortiz@bi.com.gt</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Rutas de imágenes (SVG) para el carrusel
+    const promoImages = [
+      'img/PROMO1.svg',
+      'img/PROMO2.svg',
+      'img/PROMO3.svg'
+    ];
+
+    let currentIndex = 0;
+    let oldIndex = 0;
+    const carousel = document.getElementById('carousel');
+    const loader = document.getElementById('loader');
+
+    // Mostrar loader 4s y luego arrancar carrusel
+    setTimeout(() => {
+      loader.style.display = 'none';
+      initCarousel();
+    }, 4000);
+
+    // Inicializa carrusel
+    function initCarousel() {
+      promoImages.forEach((src) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.classList.add('hide'); // Comienzan ocultas
+        carousel.appendChild(img);
+
+        // Si falla la carga, avisa en consola
+        img.addEventListener('error', () => {
+          console.warn('No se pudo cargar la imagen:', src);
+        });
+      });
+
+      // La primera imagen la mostramos
+      const images = carousel.querySelectorAll('img');
+      images[0].classList.remove('hide');
+      images[0].classList.add('show');
+
+      setInterval(changeImage, 7000);
+    }
+
+    // Cambia de imagen con efecto crossfade+zoom
+    function changeImage() {
+      const images = carousel.querySelectorAll('img');
+      oldIndex = currentIndex;
+      // Siguiente índice
+      currentIndex = (currentIndex + 1) % images.length;
+
+      // Vieja -> hide
+      images[oldIndex].classList.remove('show');
+      images[oldIndex].classList.add('hide');
+
+      // Nueva -> show
+      images[currentIndex].classList.remove('hide');
+      images[currentIndex].classList.add('show');
+    }
+  </script>
 </body>
 </html>
