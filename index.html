@@ -11,7 +11,6 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      /* Se eliminó la fuente anterior y se cambió a Times New Roman */
       font-family: 'Times New Roman', Times, serif;
       scroll-behavior: smooth;
     }
@@ -65,25 +64,34 @@
       background-color: #ffffff;
       display: flex;
       flex-direction: row;
-      align-items: center;
+      /* Alineamos al inicio para que el logo no baje */
+      align-items: flex-start;
       justify-content: space-between;
-      padding: 10px 20px;
+      padding: 20px 20px; /* Un poco más de padding para darle aire */
     }
     .header-left {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
     }
     .logo-bi {
-      height: 50px;
+      /* Aumentamos el tamaño de la imagen */
+      height: 70px;
     }
 
     /* ====== BOTONES DE ACCIÓN ====== */
     .action-buttons {
       display: flex;
-      gap: 10px;
-      /* Just in case, agregamos flex-wrap para cuando no quepan los botones. */
-      flex-wrap: wrap;
+      flex-direction: column; /* Apila verticalmente */
+      align-items: flex-end;  /* Alineados a la derecha */
+      gap: 10px;              /* Espacio entre top-buttons y el botón de WhatsApp */
     }
+
+    /* Contiene los primeros dos botones lado a lado */
+    .top-buttons {
+      display: flex;
+      gap: 10px; /* Espacio horizontal entre botones */
+    }
+
     .action-buttons button {
       background-color: #004481; 
       color: #fff;
@@ -122,7 +130,7 @@
       padding: 0 15px;
     }
 
-    /* ====== CARRUSEL (con crossfade y zoom suave) ====== */
+    /* ====== CARRUSEL ====== */
     .carousel-container {
       width: 100%;
       position: relative;
@@ -133,30 +141,26 @@
     }
     #carousel {
       width: 100%;
-      height: 400px; /* Ajusta la altura a tu gusto */
+      height: 400px; 
       position: relative;
     }
-    /* Cada imagen se apila en posición absoluta */
     #carousel img {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* para SVG sin recorte */
+      object-fit: contain;
       position: absolute;
       top: 0;
       left: 0;
-      z-index: 0;  /* la base es 0 */
+      z-index: 0;
     }
-    /* Clases de transición */
     .show {
-      z-index: 2; /* la que se está mostrando va por encima */
-      animation: fadeInZoom 1s forwards; /* Aparece con zoom in */
+      z-index: 2; 
+      animation: fadeInZoom 1s forwards;
     }
     .hide {
-      z-index: 1; /* se queda debajo mientras se desvanece */
-      animation: fadeOutZoom 1s forwards; /* Desvanece con zoom out */
+      z-index: 1; 
+      animation: fadeOutZoom 1s forwards;
     }
-
-    /* Keyframes para entrada */
     @keyframes fadeInZoom {
       0% {
         opacity: 0;
@@ -167,8 +171,6 @@
         transform: scale(1);
       }
     }
-
-    /* Keyframes para salida */
     @keyframes fadeOutZoom {
       0% {
         opacity: 1;
@@ -205,62 +207,24 @@
     .executive-info p {
       margin-bottom: 5px;
     }
-
-    /* ========== MONEDA ANIMADA (Tema financiero) ========== */
-    .finance-icon {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      background-color: gold;
-      color: #000;
-      font-weight: bold;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      cursor: pointer;
-      animation: bounceCoin 2s infinite ease-in-out;
-      z-index: 9999; /* Por encima de todo */
-    }
-    @keyframes bounceCoin {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    /* ====== RESPONSIVO ====== */
     @media (max-width: 768px) {
       .executive-profile {
         flex-direction: column;
         text-align: center;
       }
       #carousel {
-        height: 600px; /* Ajusta en móviles si lo deseas */
+        height: 700px;
       }
     }
-
-    /* 
-       A peticion: cuando sea teléfono (max 480px), 
-       los primeros dos botones se quedan en la misma fila 
-       y el de WhatsApp baja a una nueva fila 
-    */
     @media (max-width: 480px) {
       .action-buttons {
-        /* Mantiene flex para la misma fila, pero con wrap */
         flex-wrap: wrap;
         justify-content: center;
       }
-      /* Forzamos que el botón de WhatsApp baje de fila */
-      .action-buttons button.whatsapp-btn {
-        width: 100%;        /* Ocupa el ancho completo */
-        margin-top: 10px;   /* Espacio con los de arriba */
+      /* Para que el botón de WhatsApp baje de fila y ocupe el ancho */
+      .action-buttons .whatsapp-btn {
+        width: 100%;
+        margin-top: 10px;
       }
     }
   </style>
@@ -279,8 +243,10 @@
       <img src="img/LOGOBI.svg" alt="Logo Banco Industrial" class="logo-bi">
     </div>
     <div class="action-buttons">
-      <button onclick="window.location.href='COTIZADOR.html'">Cotizador</button>
-      <button onclick="window.location.href='CAPACITACION.html'">Capacitación</button>
+      <div class="top-buttons">
+        <button onclick="window.location.href='COTIZADOR.html'">Cotizador</button>
+        <button onclick="window.location.href='CAPACITACION.html'">Capacitación</button>
+      </div>
       <button 
         class="whatsapp-btn"
         onclick="window.open('https://wa.me/50231663430?text=¡Hola!%20Quiero%20más%20información%20sobre%20los%20productos%20del%20Banco%20Industrial.', '_blank', 'noopener,noreferrer');">
@@ -312,11 +278,6 @@
       </div>
     </section>
   </main>
-
-  <!-- ====== MONEDA ANIMADA ====== -->
-  <div class="finance-icon" onclick="alert('¡Sigue ahorrando e invirtiendo con Banco Industrial!');">
-    $
-  </div>
 
   <script>
     // Rutas de imágenes (SVG) para el carrusel
