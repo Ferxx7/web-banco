@@ -11,7 +11,8 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      /* Se eliminó la fuente anterior y se cambió a Times New Roman */
+      font-family: 'Times New Roman', Times, serif;
       scroll-behavior: smooth;
     }
 
@@ -80,6 +81,8 @@
     .action-buttons {
       display: flex;
       gap: 10px;
+      /* Just in case, agregamos flex-wrap para cuando no quepan los botones. */
+      flex-wrap: wrap;
     }
     .action-buttons button {
       background-color: #004481; 
@@ -203,6 +206,35 @@
       margin-bottom: 5px;
     }
 
+    /* ========== MONEDA ANIMADA (Tema financiero) ========== */
+    .finance-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: gold;
+      color: #000;
+      font-weight: bold;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+      animation: bounceCoin 2s infinite ease-in-out;
+      z-index: 9999; /* Por encima de todo */
+    }
+    @keyframes bounceCoin {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
     /* ====== RESPONSIVO ====== */
     @media (max-width: 768px) {
       .executive-profile {
@@ -211,6 +243,24 @@
       }
       #carousel {
         height: 600px; /* Ajusta en móviles si lo deseas */
+      }
+    }
+
+    /* 
+       A peticion: cuando sea teléfono (max 480px), 
+       los primeros dos botones se quedan en la misma fila 
+       y el de WhatsApp baja a una nueva fila 
+    */
+    @media (max-width: 480px) {
+      .action-buttons {
+        /* Mantiene flex para la misma fila, pero con wrap */
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      /* Forzamos que el botón de WhatsApp baje de fila */
+      .action-buttons button.whatsapp-btn {
+        width: 100%;        /* Ocupa el ancho completo */
+        margin-top: 10px;   /* Espacio con los de arriba */
       }
     }
   </style>
@@ -262,6 +312,11 @@
       </div>
     </section>
   </main>
+
+  <!-- ====== MONEDA ANIMADA ====== -->
+  <div class="finance-icon" onclick="alert('¡Sigue ahorrando e invirtiendo con Banco Industrial!');">
+    $
+  </div>
 
   <script>
     // Rutas de imágenes (SVG) para el carrusel
