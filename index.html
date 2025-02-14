@@ -64,47 +64,48 @@
       background-color: #ffffff;
       display: flex;
       flex-direction: row;
-      /* Alineamos al inicio para que el logo no baje */
-      align-items: flex-start;
+      align-items: flex-start; /* Para mantener el logo arriba */
       justify-content: space-between;
-      padding: 20px 20px; /* Un poco más de padding para darle aire */
+      padding: 20px 20px;
+      /* Agregamos un margen inferior para separarlo del contenido */
+      margin-bottom: 1px; 
     }
     .header-left {
       display: flex;
       align-items: flex-start;
     }
     .logo-bi {
-      /* Aumentamos el tamaño de la imagen */
       height: 70px;
     }
 
     /* ====== BOTONES DE ACCIÓN ====== */
     .action-buttons {
       display: flex;
-      flex-direction: column; /* Apila verticalmente */
-      align-items: flex-end;  /* Alineados a la derecha */
-      gap: 10px;              /* Espacio entre top-buttons y el botón de WhatsApp */
+      flex-direction: column; 
+      align-items: flex-end;  
+      gap: 10px;              
     }
-
-    /* Contiene los primeros dos botones lado a lado */
     .top-buttons {
       display: flex;
-      gap: 10px; /* Espacio horizontal entre botones */
+      gap: 10px; 
     }
-
     .action-buttons button {
       background-color: #004481; 
       color: #fff;
       border: none;
-      padding: 10px 16px;
+      padding: 12px 20px;
       border-radius: 4px;
       cursor: pointer;
       font-size: 1rem;
       transition: all 0.3s ease;
+      /* Sombra suave */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
     .action-buttons button:hover {
       background-color: #0078d4;
-      transform: scale(1.05);
+      /* Sombra más grande */
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      transform: translateY(-3px);
     }
     .whatsapp-btn {
       background-color: #25D366 !important;
@@ -113,6 +114,13 @@
       justify-content: center;
       gap: 6px;
       animation: float 2s infinite ease-in-out;
+      /* Sombra suave */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+    .whatsapp-btn:hover {
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      transform: translateY(-3px);
     }
     .whatsapp-btn span {
       font-size: 1.2rem;
@@ -126,7 +134,7 @@
     /* ====== CONTENEDOR PRINCIPAL ====== */
     .main-container {
       max-width: 1200px;
-      margin: 20px auto;
+      margin: 0 auto; /* Centra el contenido */
       padding: 0 15px;
     }
 
@@ -134,7 +142,8 @@
     .carousel-container {
       width: 100%;
       position: relative;
-      margin-bottom: 20px;
+      /* Aumentamos el margen inferior para más espacio */
+      margin-bottom: 10px;
       background-color: transparent;
       overflow: hidden;
       border-radius: 8px;
@@ -191,6 +200,8 @@
       background-color: #fff;
       padding: 20px;
       border-radius: 8px;
+      /* Agregamos un margen extra para darle más aire */
+      margin-bottom: 10px;
     }
     .profile-pic img {
       width: 120px;
@@ -207,6 +218,8 @@
     .executive-info p {
       margin-bottom: 5px;
     }
+
+    /* ====== RESPONSIVE ====== */
     @media (max-width: 768px) {
       .executive-profile {
         flex-direction: column;
@@ -221,7 +234,6 @@
         flex-wrap: wrap;
         justify-content: center;
       }
-      /* Para que el botón de WhatsApp baje de fila y ocupe el ancho */
       .action-buttons .whatsapp-btn {
         width: 100%;
         margin-top: 10px;
