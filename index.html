@@ -134,7 +134,7 @@
     .carousel-container {
       width: 100%;
       position: relative;
-      margin-bottom: 0px;
+      margin-bottom: 20px;
       background-color: transparent;
       overflow: hidden;
       border-radius: 8px;
@@ -179,6 +179,26 @@
       100% {
         opacity: 0;
         transform: scale(1.05);
+      }
+    }
+    
+    /* ====== AJUSTES PARA TELÉFONOS ====== */
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 0 10px;
+      }
+
+      #carousel {
+        height: auto;
+        max-height: 300px; /* Ajuste para dispositivos pequeños */
+      }
+
+      .carousel-container {
+        border-radius: 0;
+      }
+
+      #carousel img {
+        object-fit: cover; /* Hace que la imagen llene el contenedor */
       }
     }
 
