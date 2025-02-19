@@ -64,14 +64,16 @@
       background-color: #ffffff;
       display: flex;
       flex-direction: row;
-      align-items: flex-start; /* Para mantener el logo arriba */
+      align-items: center;
       justify-content: space-between;
-      padding: 20px 20px;
-      margin-bottom: 1mm; /* Ajustado a 1mm */
+      padding: 20px;
+      /* Se puede reducir o quitar la separación inferior global */
+      margin-bottom: 1mm;
     }
     .header-left {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
+      gap: 15px;
     }
     .logo-bi {
       height: 70px;
@@ -80,8 +82,8 @@
     /* ====== BOTONES DE ACCIÓN ====== */
     .action-buttons {
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
+      flex-direction: row;
+      align-items: center;
       gap: 10px;
     }
     .top-buttons {
@@ -97,12 +99,10 @@
       cursor: pointer;
       font-size: 1rem;
       transition: all 0.3s ease;
-      /* Sombra suave */
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
     .action-buttons button:hover {
       background-color: #0078d4;
-      /* Sombra más grande */
       box-shadow: 0 6px 12px rgba(0,0,0,0.2);
       transform: translateY(-3px);
     }
@@ -113,7 +113,6 @@
       justify-content: center;
       gap: 6px;
       animation: float 2s infinite ease-in-out;
-      /* Sombra suave */
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
       transition: all 0.3s ease;
     }
@@ -198,7 +197,7 @@
       background-color: #fff;
       padding: 20px;
       border-radius: 8px;
-      margin-bottom: 1mm; /* Ajustado a 1mm */
+      margin-bottom: 1mm; 
     }
     .profile-pic img {
       width: 120px;
@@ -215,27 +214,63 @@
     .executive-info p {
       margin-bottom: 5px;
     }
+    .executive-info a {
+      color: #004481;
+      text-decoration: none;
+    }
+    .executive-info a:hover {
+      text-decoration: underline;
+    }
 
     /* ====== RESPONSIVE ====== */
     @media (max-width: 768px) {
+      .header-bi {
+        flex-direction: column;
+        align-items: center;
+        /* Reducimos la separación para “pegar” el carrusel */
+        margin-bottom: 0; 
+      }
+      .header-left {
+        margin-bottom: 10px;
+      }
+      .action-buttons {
+        flex-direction: column;
+      }
+      #carousel {
+        height: 300px; /* Ajusta según necesites */
+      }
       .executive-profile {
         flex-direction: column;
         text-align: center;
       }
-      #carousel {
-        height: 700px;
-      }
     }
+
     @media (max-width: 480px) {
       .action-buttons {
-        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .top-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .whatsapp-btn {
+        width: 100%;
         justify-content: center;
       }
-      .action-buttons .whatsapp-btn {
-        width: 100%;
-        margin-top: 10px;
+
+      /* Ajustamos aún más la separación al carrusel */
+      .carousel-container {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      /* Opcional: reducir el padding del header en móvil */
+      .header-bi {
+        padding: 10px;
       }
     }
+
   </style>
 </head>
 <body>
@@ -249,19 +284,19 @@
   <!-- ===== ENCABEZADO ===== -->
   <header class="header-bi">
     <div class="header-left">
-      <img src="img/LOGOBI.svg" alt="Logo Banco Industrial" class="logo-bi">
-    </div>
-    <div class="action-buttons">
-      <div class="top-buttons">
-        <button onclick="window.location.href='COTIZADOR.html'">Cotizador</button>
-        <button onclick="window.location.href='CAPACITACION.html'">Capacitación</button>
+      <div class="action-buttons">
+        <div class="top-buttons">
+          <button onclick="window.location.href='COTIZADOR.html'">Cotizador</button>
+          <button onclick="window.location.href='CAPACITACION.html'">Capacitación</button>
+        </div>
+        <button 
+          class="whatsapp-btn"
+          onclick="window.open('https://wa.me/50231663430?text=¡Hola!%20Quiero%20más%20información%20sobre%20los%20productos%20del%20Banco%20Industrial.', '_blank', 'noopener,noreferrer');">
+          <span>📞</span> WhatsApp
+        </button>
       </div>
-      <button 
-        class="whatsapp-btn"
-        onclick="window.open('https://wa.me/50231663430?text=¡Hola!%20Quiero%20más%20información%20sobre%20los%20productos%20del%20Banco%20Industrial.', '_blank', 'noopener,noreferrer');">
-        <span>📞</span> WhatsApp
-      </button>
     </div>
+    <img src="img/LOGOBI.svg" alt="Logo Banco Industrial" class="logo-bi">
   </header>
 
   <!-- ===== CONTENEDOR PRINCIPAL ===== -->
@@ -280,7 +315,7 @@
       </div>
       <div class="executive-info">
         <h1 id="exec-name">Edgar Fernando Ortiz</h1>
-        <p id="exec-position">Ejecutivo de Negocios/Banca Personal</p>
+        <p id="exec-position">Ejecutivo de Negocios / Banca Personal</p>
         <p id="exec-contact">
           Contacto: <a href="mailto:efortiz@bi.com.gt">efortiz@bi.com.gt</a>
         </p>
@@ -291,9 +326,9 @@
   <script>
     // Rutas de imágenes (SVG) para el carrusel
     const promoImages = [
-      'img/PROMO1.svg',
-      'img/PROMO2.svg',
-      'img/PROMO3.svg'
+      'img/PROMO1.png',
+      'img/PROMO2.png',
+      'img/PROMO3.png'
     ];
 
     let currentIndex = 0;
@@ -307,15 +342,16 @@
       initCarousel();
     }, 4000);
 
-    // Inicializa carrusel
+    // Inicializa el carrusel
     function initCarousel() {
-      promoImages.forEach((src) => {
+      promoImages.forEach((src, index) => {
         const img = document.createElement('img');
+        img.setAttribute('loading', 'lazy');
         img.src = src;
+        img.alt = `Promoción ${index + 1}`;
         img.classList.add('hide'); // Comienzan ocultas
         carousel.appendChild(img);
 
-        // Si falla la carga, avisa en consola
         img.addEventListener('error', () => {
           console.warn('No se pudo cargar la imagen:', src);
         });
@@ -333,14 +369,10 @@
     function changeImage() {
       const images = carousel.querySelectorAll('img');
       oldIndex = currentIndex;
-      // Siguiente índice
       currentIndex = (currentIndex + 1) % images.length;
 
-      // Vieja -> hide
       images[oldIndex].classList.remove('show');
       images[oldIndex].classList.add('hide');
-
-      // Nueva -> show
       images[currentIndex].classList.remove('hide');
       images[currentIndex].classList.add('show');
     }
