@@ -11,6 +11,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      /* Ajuste de fuente global si lo deseas */
       font-family: 'Times New Roman', Times, serif;
       scroll-behavior: smooth;
     }
@@ -88,6 +89,9 @@
     .top-buttons {
       display: flex;
       gap: 10px;
+      /* Aseguramos que ambos botones se mantengan en la misma línea
+         incluso en pantallas pequeñas */
+      flex-wrap: nowrap;
     }
     .action-buttons button {
       background-color: #004481;
@@ -96,9 +100,15 @@
       padding: 12px 20px;
       border-radius: 4px;
       cursor: pointer;
-      font-size: 1rem;
+      /* Fuente y estilo del botón */
+      font-family: 'Arial', sans-serif; 
+      font-weight: 600;
+      font-size: 1.1rem;
       transition: all 0.3s ease;
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      /* Para que ambos tengan el mismo ancho en pantallas reducidas */
+      flex: 1; 
+      text-align: center;
     }
     .action-buttons button:hover {
       background-color: #0078d4;
@@ -114,6 +124,9 @@
       animation: float 2s infinite ease-in-out;
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
       transition: all 0.3s ease;
+      font-family: 'Arial', sans-serif; 
+      font-weight: 600;
+      font-size: 1.1rem;
     }
     .whatsapp-btn:hover {
       box-shadow: 0 6px 12px rgba(0,0,0,0.2);
@@ -143,10 +156,6 @@
       margin-bottom: 2mm;
       background-color: transparent;
       border-radius: 5px;
-      /* Añadimos flex para centrar el contenido en pantallas pequeñas */
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     #carousel {
       width: 100%;
@@ -225,30 +234,36 @@
       text-decoration: underline;
     }
 
-    /* ====== RESPONSIVE ====== */
+    /* ====== RESPONSIVE ======
+       Olvidándonos de PC, nos centramos en móviles. */
     @media (max-width: 768px) {
+      /* Reorganiza encabezado */
       .header-bi {
         flex-direction: column;
         align-items: center;
-        margin-bottom: 0; 
+        margin-bottom: 1mm;
       }
       .header-left {
         margin-bottom: 10px;
       }
       .action-buttons {
-        flex-direction: column;
+        flex-direction: column; /* Botones y WhatsApp en columna */
+      }
+      .top-buttons {
+        width: 100%;
+        /* Mantiene los botones uno al lado del otro ocupando mitad de la pantalla */
+        flex-wrap: nowrap;
+      }
+      .top-buttons button {
+        width: 50%;
+      }
+      /* Carrusel más grande en móvil */
+      .carousel-container {
+        width: 100%;
+        height: 600px; /* Aumentamos la altura en móviles */
       }
       #carousel {
-        height: 300px; /* Ajusta según necesites */
-      }
-      .executive-profile {
-        flex-direction: column;
-        text-align: center;
-      }
-      /* Aseguramos que el .carousel-container ocupe 100% y siga centrando en móvil */
-      .carousel-container {
-        width: 100% !important;
-        height: auto !important;
+        height: 100%;
       }
     }
 
@@ -257,23 +272,22 @@
         gap: 10px;
       }
       .top-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
+        gap: 0; /* Para que no haya exceso de espacio entre botones */
       }
       .whatsapp-btn {
         width: 100%;
         justify-content: center;
       }
+
       .carousel-container {
         margin-top: 0;
         margin-bottom: 0;
+        height: 500px; /* Ajusta si deseas más/menos */
       }
       .header-bi {
         padding: 10px;
       }
     }
-
   </style>
 </head>
 <body>
@@ -289,6 +303,7 @@
     <div class="header-left">
       <div class="action-buttons">
         <div class="top-buttons">
+          <!-- Botones con mismo tamaño, fuente y estilo -->
           <button onclick="window.location.href='COTIZADOR.html'">Cotizador</button>
           <button onclick="window.location.href='CAPACITACION.html'">Capacitación</button>
         </div>
