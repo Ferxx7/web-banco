@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Perfil Ejecutivo</title>
 
+  <!-- Opcional: Prefetch de imágenes para agilizar su carga -->
+  <!--
+  <link rel="prefetch" href="img/PROMO1.svg" as="image" />
+  <link rel="prefetch" href="img/PROMO2.svg" as="image" />
+  <link rel="prefetch" href="img/PROMO3.svg" as="image" />
+  -->
+
   <style>
     /* RESET / GLOBAL */
     * {
@@ -41,7 +48,7 @@
       margin-bottom: 20px;
     }
     @keyframes fadeInOut {
-      0%   { opacity: 0.4; } 
+      0%   { opacity: 0.4; }
       50%  { opacity: 1; }
       100% { opacity: 0.4; }
     }
@@ -64,47 +71,50 @@
       background-color: #ffffff;
       display: flex;
       flex-direction: row;
-      /* Alineamos al inicio para que el logo no baje */
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
-      padding: 20px 20px; /* Un poco más de padding para darle aire */
+      padding: 20px;
+      margin-bottom: 1mm; /* Ajustado a 1mm */
     }
+
+    /* Reordenamos: botones a la izquierda, logo a la derecha en desktop */
     .header-left {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
+      gap: 15px;
     }
     .logo-bi {
-      /* Aumentamos el tamaño de la imagen */
       height: 70px;
     }
 
     /* ====== BOTONES DE ACCIÓN ====== */
     .action-buttons {
       display: flex;
-      flex-direction: column; /* Apila verticalmente */
-      align-items: flex-end;  /* Alineados a la derecha */
-      gap: 10px;              /* Espacio entre top-buttons y el botón de WhatsApp */
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
     }
-
-    /* Contiene los primeros dos botones lado a lado */
     .top-buttons {
       display: flex;
-      gap: 10px; /* Espacio horizontal entre botones */
+      gap: 10px;
     }
-
     .action-buttons button {
-      background-color: #004481; 
+      background-color: #004481;
       color: #fff;
       border: none;
-      padding: 10px 16px;
+      padding: 12px 20px;
       border-radius: 4px;
       cursor: pointer;
       font-size: 1rem;
       transition: all 0.3s ease;
+      /* Sombra suave */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
     .action-buttons button:hover {
       background-color: #0078d4;
-      transform: scale(1.05);
+      /* Sombra más grande */
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      transform: translateY(-3px);
     }
     .whatsapp-btn {
       background-color: #25D366 !important;
@@ -113,6 +123,13 @@
       justify-content: center;
       gap: 6px;
       animation: float 2s infinite ease-in-out;
+      /* Sombra suave */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+    .whatsapp-btn:hover {
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      transform: translateY(-3px);
     }
     .whatsapp-btn span {
       font-size: 1.2rem;
@@ -126,7 +143,7 @@
     /* ====== CONTENEDOR PRINCIPAL ====== */
     .main-container {
       max-width: 1200px;
-      margin: 20px auto;
+      margin: 0 auto; /* Centra el contenido */
       padding: 0 15px;
     }
 
@@ -134,14 +151,14 @@
     .carousel-container {
       width: 100%;
       position: relative;
-      margin-bottom: 20px;
+      margin-bottom: 1mm; /* Ajustado a 1mm */
       background-color: transparent;
       overflow: hidden;
       border-radius: 8px;
     }
     #carousel {
       width: 100%;
-      height: 400px; 
+      height: 400px;
       position: relative;
     }
     #carousel img {
@@ -154,11 +171,11 @@
       z-index: 0;
     }
     .show {
-      z-index: 2; 
+      z-index: 2;
       animation: fadeInZoom 1s forwards;
     }
     .hide {
-      z-index: 1; 
+      z-index: 1;
       animation: fadeOutZoom 1s forwards;
     }
     @keyframes fadeInZoom {
@@ -191,6 +208,7 @@
       background-color: #fff;
       padding: 20px;
       border-radius: 8px;
+      margin-bottom: 1mm; /* Ajustado a 1mm */
     }
     .profile-pic img {
       width: 120px;
@@ -207,26 +225,56 @@
     .executive-info p {
       margin-bottom: 5px;
     }
+    .executive-info a {
+      color: #004481;
+      text-decoration: none;
+    }
+    .executive-info a:hover {
+      text-decoration: underline;
+    }
+
+    /* ====== RESPONSIVE ====== */
     @media (max-width: 768px) {
+      /* El encabezado se vuelve columna */
+      .header-bi {
+        flex-direction: column;
+        align-items: center;
+      }
+      .header-left {
+        margin-bottom: 10px;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      /* El carrusel puede tener altura más grande en algunos casos */
+      #carousel {
+        height: 300px; /* Ajusta a conveniencia */
+      }
+
+      /* El perfil se apila */
       .executive-profile {
         flex-direction: column;
         text-align: center;
       }
-      #carousel {
-        height: 700px;
-      }
     }
+
     @media (max-width: 480px) {
       .action-buttons {
-        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .top-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .whatsapp-btn {
+        width: 100%;
         justify-content: center;
       }
-      /* Para que el botón de WhatsApp baje de fila y ocupe el ancho */
-      .action-buttons .whatsapp-btn {
-        width: 100%;
-        margin-top: 10px;
-      }
     }
+
   </style>
 </head>
 <body>
@@ -240,19 +288,21 @@
   <!-- ===== ENCABEZADO ===== -->
   <header class="header-bi">
     <div class="header-left">
-      <img src="img/LOGOBI.svg" alt="Logo Banco Industrial" class="logo-bi">
-    </div>
-    <div class="action-buttons">
-      <div class="top-buttons">
-        <button onclick="window.location.href='COTIZADOR.html'">Cotizador</button>
-        <button onclick="window.location.href='CAPACITACION.html'">Capacitación</button>
+      <!-- Botones de acción a la izquierda -->
+      <div class="action-buttons">
+        <div class="top-buttons">
+          <button onclick="window.location.href='COTIZADOR.html'">Cotizador</button>
+          <button onclick="window.location.href='CAPACITACION.html'">Capacitación</button>
+        </div>
+        <button 
+          class="whatsapp-btn"
+          onclick="window.open('https://wa.me/50231663430?text=¡Hola!%20Quiero%20más%20información%20sobre%20los%20productos%20del%20Banco%20Industrial.', '_blank', 'noopener,noreferrer');">
+          <span>📞</span> WhatsApp
+        </button>
       </div>
-      <button 
-        class="whatsapp-btn"
-        onclick="window.open('https://wa.me/50231663430?text=¡Hola!%20Quiero%20más%20información%20sobre%20los%20productos%20del%20Banco%20Industrial.', '_blank', 'noopener,noreferrer');">
-        <span>📞</span> WhatsApp
-      </button>
     </div>
+    <!-- Logo a la derecha en desktop -->
+    <img src="img/LOGOBI.svg" alt="Logo Banco Industrial" class="logo-bi">
   </header>
 
   <!-- ===== CONTENEDOR PRINCIPAL ===== -->
@@ -271,7 +321,7 @@
       </div>
       <div class="executive-info">
         <h1 id="exec-name">Edgar Fernando Ortiz</h1>
-        <p id="exec-position">Ejecutivo de Negocios/Banca Personal</p>
+        <p id="exec-position">Ejecutivo de Negocios / Banca Personal</p>
         <p id="exec-contact">
           Contacto: <a href="mailto:efortiz@bi.com.gt">efortiz@bi.com.gt</a>
         </p>
@@ -298,11 +348,14 @@
       initCarousel();
     }, 4000);
 
-    // Inicializa carrusel
+    // Inicializa el carrusel
     function initCarousel() {
-      promoImages.forEach((src) => {
+      promoImages.forEach((src, index) => {
         const img = document.createElement('img');
+        // Uso de 'loading="lazy"' para optimizar la carga diferida
+        img.setAttribute('loading', 'lazy');
         img.src = src;
+        img.alt = `Promoción ${index + 1}`;
         img.classList.add('hide'); // Comienzan ocultas
         carousel.appendChild(img);
 
