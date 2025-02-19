@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistema de Capacitación Financiera - Banco Industrial</title>
+
+  <style>
+    /* RESET BÁSICO */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #f7f9fb;
+      color: #333;
+    }
+
+    /* ENCABEZADO */
+    header {
+      background-color: #004481;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 15px 30px;
+      gap: 20px;
+    }
+    .header-logo {
+      height: 60px;
+      width: auto;
+    }
+    .header-title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .header-title h1 {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+    .header-title p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    /* CONTENEDOR PRINCIPAL */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* SECCIÓN: INTRO O BIENVENIDA */
+    .intro-section {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      animation: fadeInUp 0.8s ease-in-out;
+    }
+    .intro-section h2 {
+      color: #004481;
+      margin-bottom: 10px;
+    }
+    .intro-section p {
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    /* ACORDEÓN DE TEMAS */
+    .accordion {
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      animation: fadeInUp 1s ease-in-out;
+      overflow: hidden;
+    }
+    .accordion-header {
+      padding: 15px 20px;
+      cursor: pointer;
+      position: relative;
+      border-bottom: 1px solid #eee;
+      background-color: #fafafa;
+      transition: background-color 0.3s;
+    }
+    .accordion-header h3 {
+      color: #004481;
+      font-size: 1.1rem;
+    }
+    .accordion-header:hover {
+      background-color: #f0f0f0;
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 20px;
+    }
+    .accordion-content p {
+      line-height: 1.4;
+      margin: 10px 0;
+    }
+    .accordion.active .accordion-content {
+      max-height: 600px; /* Ajusta si necesitas más espacio */
+      padding: 10px 20px 20px 20px;
+    }
+
+    /* ANIMACIONES */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0; 
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1; 
+        transform: translateY(0);
+      }
+    }
+
+    /* ESTILOS RESPONSIVE */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-title h1 {
+        font-size: 1.2rem;
+      }
+      main {
+        padding: 10px;
+      }
+      .accordion-header {
+        padding: 10px 15px;
+      }
+      .accordion-content {
+        padding: 0 15px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ENCABEZADO -->
+  <header>
+    <div class="header-title">
+      <h1>Sistema de Capacitación Financiera</h1>
+      <p>Aprende con temas claros y sencillos.</p>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main>
+
+    <!-- INTRO/BIENVENIDA -->
+    <section class="intro-section">
+      <h2>¡Bienvenido!</h2>
+      <p>
+        En Banco Industrial queremos ayudarte a manejar mejor tu dinero. Sabemos que no siempre es fácil entender los temas financieros, por lo que hemos preparado esta capacitación con un lenguaje sencillo, ejemplos prácticos y consejos que funcionan en la vida real.
+      </p>
+      <p>
+        Queremos que más guatemaltecos puedan acceder a oportunidades de crédito, ahorro y planes que les ayuden a salir adelante. Esta capacitación está diseñada para que, aunque tengas pocos estudios, comprendas lo esencial y apliques lo aprendido. ¡Tú puedes hacer que tu dinero rinda más!
+      </p>
+    </section>
+
+    <!-- ACORDEÓN DE TEMAS PRINCIPALES -->
+    <!-- TEMA 1: QUÉ ES UN CRÉDITO -->
+    <div class="accordion" id="tema-1">
+      <div class="accordion-header">
+        <h3>1. ¿Qué es un Crédito?</h3>
+      </div>
+      <div class="accordion-content">
+        <p>
+          Un crédito es un dinero que te presta el banco con la condición de que lo devuelvas en cuotas (pagos parciales) durante un tiempo acordado, sumando intereses. Es como si alguien te ayudara con dinero ahora, pero te toca devolverlo después un poco más caro.
+        </p>
+        <p>
+          Por ejemplo, si necesitas Q5,000 para tu negocio o emergencia, el banco te los presta y tú pagas mensualmente. Si cumples, mejoras tu reputación financiera y podrás solicitar créditos más grandes o con mejores tasas.
+        </p>
+      </div>
+    </div>
+
+    <!-- TEMA 2: IMPORTANCIA DE PAGAR A TIEMPO -->
+    <div class="accordion" id="tema-2">
+      <div class="accordion-header">
+        <h3>2. Pagar a Tiempo y por qué te Conviene</h3>
+      </div>
+      <div class="accordion-content">
+        <p>
+          Cada vez que pagas puntual, el banco ve que eres una persona responsable. Esto se reflejará en tu “historial crediticio” o “score de crédito”. Con un buen historial, es más fácil que te presten para cosas más grandes: una casa, un carro, o hasta tu propia empresa.
+        </p>
+        <p>
+          Si te atrasas, la deuda crece y tu score baja. Así que procura planificar tus pagos para no pasarte de la fecha de vencimiento. Aunque sea un pequeño sacrificio, tu futuro económico te lo va a agradecer.
+        </p>
+      </div>
+    </div>
+
+    <!-- TEMA 3: AHORRO Y FONDO DE EMERGENCIA -->
+    <div class="accordion" id="tema-3">
+      <div class="accordion-header">
+        <h3>3. Ahorro y Fondo de Emergencia</h3>
+      </div>
+      <div class="accordion-content">
+        <p>
+          A veces, ganar poco dinero nos hace creer que no podemos ahorrar. ¡Mentira! Aunque sea un 5% de tu salario, apartarlo en una cuenta de ahorro puede salvarte de imprevistos y evitar que te endeudes más.
+        </p>
+        <p>
+          Te sugerimos tener un “fondo de emergencia” para cubrir gastos inesperados, como enfermedades o reparaciones. Esto evita que tengas que pedir créditos urgentes con intereses muy altos.
+        </p>
+      </div>
+    </div>
+
+    <!-- TEMA 4: SCORE DE CRÉDITO -->
+    <div class="accordion" id="tema-4">
+      <div class="accordion-header">
+        <h3>4. Score de Crédito: Tu Reputación con los Bancos</h3>
+      </div>
+      <div class="accordion-content">
+        <p>
+          El “score” es una nota que mide qué tan cumplido eres con tus deudas y pagos. Mientras mejor pagues, más alto tu score. Esto te abre puertas a préstamos con tasas más cómodas y te permite negociar mejores condiciones.
+        </p>
+        <p>
+          Si tu score es bajo, los bancos desconfían porque creen que podrías no pagarles. Por eso, es crucial cuidarlo pagando puntualmente y no acumulando demasiadas deudas a la vez.
+        </p>
+      </div>
+    </div>
+
+    <!-- TEMA 5: PLANIFICAR TUS GASTOS -->
+    <div class="accordion" id="tema-5">
+      <div class="accordion-header">
+        <h3>5. Planifica tus Gastos y Evita Gastar de más</h3>
+      </div>
+      <div class="accordion-content">
+        <p>
+          Haz un presupuesto sencillo: divide tus ingresos en categorías (comida, transporte, estudios, entretenimiento, etc.). Así sabes dónde va tu dinero y evitas gastar de más en lo innecesario.
+        </p>
+        <p>
+          Una familia organizada es menos propensa a caer en deudas o atrasarse en pagos. Planificar te ayuda a poner límites y priorizar lo esencial (alimentación, vivienda, salud, educación).
+        </p>
+      </div>
+    </div>
+
+    <!-- TEMA 6: MICROFINANZAS Y APOYO A PEQUEÑOS NEGOCIOS -->
+    <div class="accordion" id="tema-6">
+      <div class="accordion-header">
+        <h3>6. Microfinanzas: Una Oportunidad para Tu Negocio</h3>
+      </div>
+      <div class="accordion-content">
+        <p>
+          Las microfinanzas son créditos pequeños que pueden ayudarte a iniciar o hacer crecer un negocio local: vender comida, artesanías, ropa, etc. Son ideales para personas con pocos ingresos, ya que el banco presta montos más bajos y a plazos cómodos.
+        </p>
+        <p>
+          Con un crédito así, puedes comprar materia prima o invertir en herramientas. Siempre y cuando cumplas con los pagos, podrás acceder a montos mayores o incluso a otros productos financieros que te faciliten el crecimiento.
+        </p>
+      </div>
+    </div>
+
+    <!-- TEMA 7: TIPS PARA FAMILIAS GUATEMALTECAS -->
+    <div class="accordion" id="tema-7">
+      <div class="accordion-header">
+        <h3>7. Consejos Prácticos para la Clase Trabajadora en Guatemala</h3>
+      </div>
+      <div class="accordion-content">
+        <p>
+          - **Comparte gastos**: Si vives con familia, hablen de los ingresos y cómo dividir los pagos de servicios básicos.  
+          - **Usa la tecnología**: Hay apps gratuitas donde puedes anotar gastos para no perder detalle.  
+          - **Aprende de tus errores**: Si te endeudaste, no te desanimes. Habla con tu banco sobre planes de pago.
+        </p>
+        <p>
+          - **Busca descuentos locales**: En mercados o tiendas de tu barrio, aprovecha ofertas.  
+          - **Capacítate más**: Pregunta en tu municipio o en Banco Industrial si hay talleres gratuitos de finanzas.  
+          - **Sueña en grande**: Aunque ganes poco, con organización puedes lograr metas como estudiar, montar un negocio, o comprar un terrenito.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // SCRIPT PARA HACER FUNCIONAR EL ACORDEÓN
+    const accordions = document.querySelectorAll('.accordion');
+
+    accordions.forEach(acc => {
+      const header = acc.querySelector('.accordion-header');
+      header.addEventListener('click', () => {
+        // Cierra cualquier otro acordeón abierto
+        accordions.forEach(item => {
+          if (item !== acc) {
+            item.classList.remove('active');
+          }
+        });
+        // Toggle (abrir/cerrar) acordeón actual
+        acc.classList.toggle('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

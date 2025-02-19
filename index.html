@@ -22,7 +22,7 @@
       color: #333;
     }
 
-    /* ====== LOADER ====== */
+    /* ===== LOADER ===== */
     .loader-container {
       position: fixed;
       z-index: 9999;
@@ -59,7 +59,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* ====== ENCABEZADO ====== */
+    /* ===== ENCABEZADO ===== */
     .header-bi {
       width: 100%;
       background-color: #ffffff;
@@ -67,8 +67,8 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      padding: 20px;
-      margin-bottom: 2mm;
+      padding: 15px; /* Reducido a 15px para menos margen */
+      margin-bottom: 5px; /* Menor separación con el carrusel */
     }
     .header-left {
       display: flex;
@@ -79,7 +79,7 @@
       height: 70px;
     }
 
-    /* ====== BOTONES DE ACCIÓN ====== */
+    /* ===== BOTONES DE ACCIÓN ===== */
     .action-buttons {
       display: flex;
       flex-direction: row;
@@ -89,10 +89,12 @@
     .top-buttons {
       display: flex;
       gap: 10px;
-      /* Aseguramos que ambos botones se mantengan en la misma línea
-         incluso en pantallas pequeñas */
       flex-wrap: nowrap;
+      /* Centra los botones y les da tamaño fijo */
+      justify-content: center;
+      align-items: center;
     }
+    /* Estilos de los botones */
     .action-buttons button {
       background-color: #004481;
       color: #fff;
@@ -100,15 +102,14 @@
       padding: 12px 20px;
       border-radius: 4px;
       cursor: pointer;
-      /* Fuente y estilo del botón */
       font-family: 'Arial', sans-serif; 
       font-weight: 600;
       font-size: 1.1rem;
       transition: all 0.3s ease;
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-      /* Para que ambos tengan el mismo ancho en pantallas reducidas */
-      flex: 1; 
       text-align: center;
+      /* Tamaño fijo para que no se estiren ni se peguen demasiado */
+      min-width: 130px;
     }
     .action-buttons button:hover {
       background-color: #0078d4;
@@ -127,6 +128,7 @@
       font-family: 'Arial', sans-serif; 
       font-weight: 600;
       font-size: 1.1rem;
+      min-width: 150px; /* Para que sea un poco más ancho */
     }
     .whatsapp-btn:hover {
       box-shadow: 0 6px 12px rgba(0,0,0,0.2);
@@ -141,19 +143,19 @@
       100% { transform: translateY(0px); }
     }
 
-    /* ====== CONTENEDOR PRINCIPAL ====== */
+    /* ===== CONTENEDOR PRINCIPAL ===== */
     .main-container {
       max-width: 1200px;
-      margin: 0 auto; /* Centra el contenido */
+      margin: 0 auto;
       padding: 0 15px;
     }
 
-    /* ====== CARRUSEL ====== */
+    /* ===== CARRUSEL DE IMÁGENES PROMOCIONALES ===== */
     .carousel-container {
       width: 740px;
-      height: 500px;
+      height: 450px; /* Más pequeño para reducir espacio */
       position: relative;
-      margin-bottom: 2mm;
+      margin-bottom: 5px; /* Menor margen con sección siguiente */
       background-color: transparent;
       border-radius: 5px;
     }
@@ -200,31 +202,39 @@
       }
     }
 
-    /* ====== PERFIL DEL EJECUTIVO ====== */
+    /* ===== PERFIL DEL EJECUTIVO ===== */
     .executive-profile {
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 20px;
       background-color: #fff;
       padding: 20px;
       border-radius: 8px;
-      margin-bottom: 1mm; 
+      margin-bottom: 5px; /* Reducido margen */
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      gap: 20px; /* Separación entre foto y texto */
     }
     .profile-pic img {
-      width: 120px;
-      height: 120px;
+      width: 130px;
+      height: 130px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid #004481;
     }
+    .executive-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
     .executive-info h1 {
       color: #004481;
-      margin-bottom: 5px;
-      font-size: 1.5rem;
+      margin-bottom: 8px;
+      font-size: 1.6rem;
     }
     .executive-info p {
-      margin-bottom: 5px;
+      margin-bottom: 4px;
+      font-size: 1rem;
+      color: #444;
     }
     .executive-info a {
       color: #004481;
@@ -234,36 +244,40 @@
       text-decoration: underline;
     }
 
-    /* ====== RESPONSIVE ======
-       Olvidándonos de PC, nos centramos en móviles. */
+    /* ===== RESPONSIVE (Nos centramos en móviles) ===== */
     @media (max-width: 768px) {
       /* Reorganiza encabezado */
       .header-bi {
         flex-direction: column;
         align-items: center;
-        margin-bottom: 1mm;
+        margin-bottom: 5px;
       }
       .header-left {
         margin-bottom: 10px;
       }
       .action-buttons {
-        flex-direction: column; /* Botones y WhatsApp en columna */
+        flex-direction: column; 
       }
       .top-buttons {
-        width: 100%;
-        /* Mantiene los botones uno al lado del otro ocupando mitad de la pantalla */
-        flex-wrap: nowrap;
+        justify-content: center;
       }
-      .top-buttons button {
-        width: 50%;
-      }
+
       /* Carrusel más grande en móvil */
       .carousel-container {
         width: 100%;
-        height: 600px; /* Aumentamos la altura en móviles */
+        height: 600px;
       }
       #carousel {
         height: 100%;
+      }
+
+      /* Perfil del ejecutivo en columna */
+      .executive-profile {
+        flex-direction: column;
+        text-align: center;
+      }
+      .profile-pic img {
+        margin-bottom: 10px;
       }
     }
 
@@ -272,7 +286,7 @@
         gap: 10px;
       }
       .top-buttons {
-        gap: 0; /* Para que no haya exceso de espacio entre botones */
+        gap: 10px; 
       }
       .whatsapp-btn {
         width: 100%;
@@ -281,8 +295,8 @@
 
       .carousel-container {
         margin-top: 0;
-        margin-bottom: 0;
-        height: 500px; /* Ajusta si deseas más/menos */
+        margin-bottom: 5px;
+        height: 500px; 
       }
       .header-bi {
         padding: 10px;
@@ -303,7 +317,7 @@
     <div class="header-left">
       <div class="action-buttons">
         <div class="top-buttons">
-          <!-- Botones con mismo tamaño, fuente y estilo -->
+          <!-- Botones con mismo tamaño y centrados -->
           <button onclick="window.location.href='COTIZADOR.html'">Cotizador</button>
           <button onclick="window.location.href='CAPACITACION.html'">Capacitación</button>
         </div>
@@ -332,17 +346,17 @@
           alt="Foto de Perfil">
       </div>
       <div class="executive-info">
-        <h1 id="exec-name">Edgar Fernando Ortiz</h1>
-        <p id="exec-position">Ejecutivo de Negocios / Banca Personal</p>
-        <p id="exec-contact">
-          Contacto: <a href="mailto:efortiz@bi.com.gt">efortiz@bi.com.gt</a>
+        <h1>Edgar Fernando Ortiz</h1>
+        <p>Ejecutivo de Negocios / Banca Personal</p>
+        <p>Contacto: 
+          <a href="mailto:efortiz@bi.com.gt">efortiz@bi.com.gt</a>
         </p>
       </div>
     </section>
   </main>
 
   <script>
-    // Rutas de imágenes (SVG) para el carrusel
+    // Imágenes para el carrusel
     const promoImages = [
       'img/PROMO1.png',
       'img/PROMO2.png',
@@ -354,20 +368,20 @@
     const carousel = document.getElementById('carousel');
     const loader = document.getElementById('loader');
 
-    // Mostrar loader 4s y luego arrancar carrusel
+    // Oculta el loader a los 4s y arranca el carrusel
     setTimeout(() => {
       loader.style.display = 'none';
       initCarousel();
     }, 4000);
 
-    // Inicializa el carrusel
+    // Inicializa carrusel
     function initCarousel() {
       promoImages.forEach((src, index) => {
         const img = document.createElement('img');
         img.setAttribute('loading', 'lazy');
         img.src = src;
         img.alt = `Promoción ${index + 1}`;
-        img.classList.add('hide'); // Comienzan ocultas
+        img.classList.add('hide'); 
         carousel.appendChild(img);
 
         img.addEventListener('error', () => {
@@ -375,15 +389,16 @@
         });
       });
 
-      // La primera imagen la mostramos
+      // Muestra la primera imagen
       const images = carousel.querySelectorAll('img');
       images[0].classList.remove('hide');
       images[0].classList.add('show');
 
+      // Cambia cada 7s
       setInterval(changeImage, 7000);
     }
 
-    // Cambia de imagen con efecto crossfade+zoom
+    // Efecto crossfade+zoom
     function changeImage() {
       const images = carousel.querySelectorAll('img');
       oldIndex = currentIndex;
