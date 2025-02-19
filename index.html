@@ -5,13 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Perfil Ejecutivo</title>
 
-  <!-- Opcional: Prefetch de imágenes para agilizar su carga -->
-  <!--
-  <link rel="prefetch" href="img/PROMO1.svg" as="image" />
-  <link rel="prefetch" href="img/PROMO2.svg" as="image" />
-  <link rel="prefetch" href="img/PROMO3.svg" as="image" />
-  -->
-
   <style>
     /* RESET / GLOBAL */
     * {
@@ -74,10 +67,9 @@
       align-items: center;
       justify-content: space-between;
       padding: 20px;
-      margin-bottom: 1mm; /* Ajustado a 1mm */
+      /* Se puede reducir o quitar la separación inferior global */
+      margin-bottom: 1mm;
     }
-
-    /* Reordenamos: botones a la izquierda, logo a la derecha en desktop */
     .header-left {
       display: flex;
       align-items: center;
@@ -107,12 +99,10 @@
       cursor: pointer;
       font-size: 1rem;
       transition: all 0.3s ease;
-      /* Sombra suave */
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
     .action-buttons button:hover {
       background-color: #0078d4;
-      /* Sombra más grande */
       box-shadow: 0 6px 12px rgba(0,0,0,0.2);
       transform: translateY(-3px);
     }
@@ -123,7 +113,6 @@
       justify-content: center;
       gap: 6px;
       animation: float 2s infinite ease-in-out;
-      /* Sombra suave */
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
       transition: all 0.3s ease;
     }
@@ -208,7 +197,7 @@
       background-color: #fff;
       padding: 20px;
       border-radius: 8px;
-      margin-bottom: 1mm; /* Ajustado a 1mm */
+      margin-bottom: 1mm; 
     }
     .profile-pic img {
       width: 120px;
@@ -235,25 +224,21 @@
 
     /* ====== RESPONSIVE ====== */
     @media (max-width: 768px) {
-      /* El encabezado se vuelve columna */
       .header-bi {
         flex-direction: column;
         align-items: center;
+        /* Reducimos la separación para “pegar” el carrusel */
+        margin-bottom: 0; 
       }
       .header-left {
         margin-bottom: 10px;
       }
-
       .action-buttons {
         flex-direction: column;
       }
-
-      /* El carrusel puede tener altura más grande en algunos casos */
       #carousel {
-        height: 300px; /* Ajusta a conveniencia */
+        height: 300px; /* Ajusta según necesites */
       }
-
-      /* El perfil se apila */
       .executive-profile {
         flex-direction: column;
         text-align: center;
@@ -273,6 +258,17 @@
         width: 100%;
         justify-content: center;
       }
+
+      /* Ajustamos aún más la separación al carrusel */
+      .carousel-container {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      /* Opcional: reducir el padding del header en móvil */
+      .header-bi {
+        padding: 10px;
+      }
     }
 
   </style>
@@ -288,7 +284,6 @@
   <!-- ===== ENCABEZADO ===== -->
   <header class="header-bi">
     <div class="header-left">
-      <!-- Botones de acción a la izquierda -->
       <div class="action-buttons">
         <div class="top-buttons">
           <button onclick="window.location.href='COTIZADOR.html'">Cotizador</button>
@@ -301,7 +296,6 @@
         </button>
       </div>
     </div>
-    <!-- Logo a la derecha en desktop -->
     <img src="img/LOGOBI.svg" alt="Logo Banco Industrial" class="logo-bi">
   </header>
 
@@ -352,14 +346,12 @@
     function initCarousel() {
       promoImages.forEach((src, index) => {
         const img = document.createElement('img');
-        // Uso de 'loading="lazy"' para optimizar la carga diferida
         img.setAttribute('loading', 'lazy');
         img.src = src;
         img.alt = `Promoción ${index + 1}`;
         img.classList.add('hide'); // Comienzan ocultas
         carousel.appendChild(img);
 
-        // Si falla la carga, avisa en consola
         img.addEventListener('error', () => {
           console.warn('No se pudo cargar la imagen:', src);
         });
@@ -377,14 +369,10 @@
     function changeImage() {
       const images = carousel.querySelectorAll('img');
       oldIndex = currentIndex;
-      // Siguiente índice
       currentIndex = (currentIndex + 1) % images.length;
 
-      // Vieja -> hide
       images[oldIndex].classList.remove('show');
       images[oldIndex].classList.add('hide');
-
-      // Nueva -> show
       images[currentIndex].classList.remove('hide');
       images[currentIndex].classList.add('show');
     }
