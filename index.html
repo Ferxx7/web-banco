@@ -67,8 +67,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 20px;
-      /* Se puede reducir o quitar la separación inferior global */
-      margin-bottom: 1mm;
+      margin-bottom: 2mm;
     }
     .header-left {
       display: flex;
@@ -138,16 +137,20 @@
 
     /* ====== CARRUSEL ====== */
     .carousel-container {
-      width: 100%;
+      width: 740px;
+      height: 500px;
       position: relative;
-      margin-bottom: 1mm; /* Ajustado a 1mm */
+      margin-bottom: 2mm;
       background-color: transparent;
-      overflow: hidden;
-      border-radius: 8px;
+      border-radius: 5px;
+      /* Añadimos flex para centrar el contenido en pantallas pequeñas */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     #carousel {
       width: 100%;
-      height: 400px;
+      height: 100%;
       position: relative;
     }
     #carousel img {
@@ -227,7 +230,6 @@
       .header-bi {
         flex-direction: column;
         align-items: center;
-        /* Reducimos la separación para “pegar” el carrusel */
         margin-bottom: 0; 
       }
       .header-left {
@@ -242,6 +244,11 @@
       .executive-profile {
         flex-direction: column;
         text-align: center;
+      }
+      /* Aseguramos que el .carousel-container ocupe 100% y siga centrando en móvil */
+      .carousel-container {
+        width: 100% !important;
+        height: auto !important;
       }
     }
 
@@ -258,14 +265,10 @@
         width: 100%;
         justify-content: center;
       }
-
-      /* Ajustamos aún más la separación al carrusel */
       .carousel-container {
         margin-top: 0;
         margin-bottom: 0;
       }
-
-      /* Opcional: reducir el padding del header en móvil */
       .header-bi {
         padding: 10px;
       }
@@ -310,7 +313,7 @@
     <section class="executive-profile">
       <div class="profile-pic">
         <img
-          src="https://pps.whatsapp.net/v/t61.24694-24/425107398_491267650342082_6382262898382819345_n.jpg?ccb=11-4&oh=01_Q5AaIOQgOEpp_NsGmWB5HesYFnH-J5Wx22g8iCmsYRdIxVkN&oe=67B11455&_nc_sid=5e03e0&_nc_cat=101"
+          src='img/PICEJEC.JPG'
           alt="Foto de Perfil">
       </div>
       <div class="executive-info">
