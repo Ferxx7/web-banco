@@ -11,6 +11,7 @@
       box-sizing: border-box;
       font-family: 'Playfair Display', serif;
     }
+
     body {
       background-color: #004481;
       color: #fff;
@@ -25,22 +26,27 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.2);
       color: #000;
     }
+
     h2, h3 {
       color: #004481;
       margin-bottom: 20px;
       text-align: center;
     }
+
     label {
       display: block;
       margin: 12px 0 6px;
       font-weight: 600;
     }
+
     input, select {
       width: 100%;
       padding: 10px;
       border-radius: 8px;
       border: 1px solid #ccc;
+      font-family: 'Playfair Display', serif;
     }
+
     button {
       background-color: #004481;
       color: white;
@@ -52,7 +58,9 @@
       transition: 0.3s ease;
       display: block;
       margin: 20px auto 0;
+      font-family: 'Playfair Display', serif;
     }
+
     button:hover {
       background-color: #0078d4;
     }
@@ -60,6 +68,7 @@
     .slider-container {
       margin: 20px 0;
     }
+
     .slider {
       width: 100%;
       height: 10px;
@@ -67,6 +76,7 @@
       background: #ccc;
       outline: none;
     }
+
     .slider::-webkit-slider-thumb {
       appearance: none;
       width: 24px;
@@ -85,7 +95,6 @@
 
     .display-box {
       font-size: 1.6rem;
-      font-family: 'Playfair Display', serif;
       background: rgba(200, 200, 200, 0.4);
       color: #000;
       padding: 14px;
@@ -93,25 +102,31 @@
       margin-bottom: 10px;
       text-align: center;
       letter-spacing: 1px;
+      font-family: 'Playfair Display', serif;
     }
 
     table {
       width: 100%;
       margin-top: 20px;
       border-collapse: collapse;
+      font-family: 'Playfair Display', serif;
     }
+
     th, td {
       border: 1px solid #ccc;
       padding: 10px;
       text-align: center;
     }
+
     th {
       background-color: #f2f2f2;
     }
+
     .highlight {
       font-weight: bold;
       background-color: #e6f2ff;
     }
+
     .aviso {
       color: red;
       font-size: 0.95rem;
@@ -127,9 +142,11 @@
       padding: 12px 20px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
+
     .header img {
       height: 52px;
     }
+
     .back-btn {
       background-color: #0078d4;
       color: white;
@@ -138,15 +155,17 @@
       border-radius: 6px;
       cursor: pointer;
       font-size: 0.9rem;
+      font-family: 'Playfair Display', serif;
     }
   </style>
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <div class="header">
   <img src="img/LOGOBI.svg" alt="Logo Banco Industrial" />
-  <button class="back-btn" onclick="window.location.href='index.html'">⬅ Volver al Inicio</button>
+  <button class="back-btn" onclick="window.location.href='index.html'">Volver al Inicio</button>
 </div>
 
 <div class="container">
@@ -203,8 +222,7 @@ montoInput.addEventListener('input', () => {
   montoDisplay.textContent = `Q${montoInput.value}`;
 });
 
-const calcularBtn = document.getElementById('calcular');
-calcularBtn.addEventListener('click', () => {
+document.getElementById('calcular').addEventListener('click', () => {
   const nit = nitInput.value.trim();
   if (!nit) {
     alert('Por favor ingrese su NIT para continuar.');
@@ -226,8 +244,7 @@ calcularBtn.addEventListener('click', () => {
   document.getElementById('resultado').style.display = 'block';
 });
 
-const contactarBtn = document.getElementById('contactar');
-contactarBtn.addEventListener('click', () => {
+document.getElementById('contactar').addEventListener('click', () => {
   const nit = nitInput.value;
   const salario = salarioInput.value;
   const empresa = document.getElementById('empresa').value;
