@@ -3,302 +3,259 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sistema de Capacitación Financiera - Banco Industrial</title>
-
+  <title>Capacitación Financiera - Banco Industrial</title>
   <style>
-    /* RESET BÁSICO */
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
-      scroll-behavior: smooth;
+      margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif;
     }
-
     body {
-      background-color: #f7f9fb;
-      color: #333;
+      background: #f4f6f9; color: #333;
     }
-
-    /* ENCABEZADO */
     header {
-      background-color: #004481;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      padding: 15px 30px;
-      gap: 20px;
+      background: #004481; color: #fff; padding: 20px 30px;
     }
-    .header-logo {
-      height: 60px;
-      width: auto;
-    }
-    .header-title {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .header-title h1 {
-      font-size: 1.5rem;
+    header h1 {
+      font-size: 1.8rem;
       margin-bottom: 5px;
     }
-    .header-title p {
-      font-size: 0.95rem;
+    header p {
+      font-size: 1rem;
       opacity: 0.9;
     }
 
-    /* CONTENEDOR PRINCIPAL */
     main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
+      max-width: 1000px; margin: 30px auto; padding: 0 20px;
     }
 
-    /* SECCIÓN: INTRO O BIENVENIDA */
-    .intro-section {
+    .card {
       background: #fff;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      animation: fadeInUp 0.8s ease-in-out;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
-    .intro-section h2 {
+
+    h2 {
       color: #004481;
       margin-bottom: 10px;
     }
-    .intro-section p {
-      line-height: 1.4;
-      margin-bottom: 10px;
+
+    .test-question p {
+      font-weight: bold;
     }
 
-    /* ACORDEÓN DE TEMAS */
-    .accordion {
-      background: #fff;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      animation: fadeInUp 1s ease-in-out;
-      overflow: hidden;
+    label {
+      display: block;
+      margin-left: 15px;
+      margin-bottom: 5px;
     }
-    .accordion-header {
-      padding: 15px 20px;
+
+    .submit-btn {
+      background: #004481;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-top: 15px;
       cursor: pointer;
-      position: relative;
-      border-bottom: 1px solid #eee;
-      background-color: #fafafa;
-      transition: background-color 0.3s;
     }
-    .accordion-header h3 {
+
+    .accordion {
+      border-top: 1px solid #ccc;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid #ccc;
+    }
+
+    .accordion-title {
+      background: #f9f9f9;
+      padding: 15px;
+      cursor: pointer;
       color: #004481;
-      font-size: 1.1rem;
+      font-weight: bold;
     }
-    .accordion-header:hover {
-      background-color: #f0f0f0;
-    }
+
     .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.4s ease;
-      padding: 0 20px;
+      display: none;
+      padding: 15px;
+      background: #fff;
+      line-height: 1.6;
     }
-    .accordion-content p {
-      line-height: 1.4;
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 99;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .modal-content p {
       margin: 10px 0;
     }
-    .accordion.active .accordion-content {
-      max-height: 600px; /* Ajusta si necesitas más espacio */
-      padding: 10px 20px 20px 20px;
-    }
 
-    /* ANIMACIONES */
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0; 
-        transform: translateY(30px);
-      }
-      100% {
-        opacity: 1; 
-        transform: translateY(0);
-      }
+    .modal-content button {
+      margin-top: 15px;
+      background-color: #004481;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
     }
-
-    /* ESTILOS RESPONSIVE */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .header-title h1 {
-        font-size: 1.2rem;
-      }
-      main {
-        padding: 10px;
-      }
-      .accordion-header {
-        padding: 10px 15px;
-      }
-      .accordion-content {
-        padding: 0 15px;
-      }
-    }
-
   </style>
 </head>
 <body>
 
-  <!-- ENCABEZADO -->
-  <header>
-    <div class="header-title">
-      <h1>Sistema de Capacitación Financiera</h1>
-      <p>Aprende con temas claros y sencillos.</p>
-    </div>
-  </header>
+<header>
+  <h1>Sistema de Capacitación Financiera</h1>
+  <p>Formación diseñada para transformar tu relación con el dinero.</p>
+</header>
 
-  <!-- CONTENEDOR PRINCIPAL -->
-  <main>
+<main>
+  <div class="card">
+    <h2>Test Inicial</h2>
+    <form id="financialTest">
+      <div class="test-question">
+        <p>1. ¿Cuál es el principal beneficio de un préstamo personal bien utilizado?</p>
+        <label><input type="radio" name="q1" value="C"> Financiar metas que generen valor a futuro.</label>
+        <label><input type="radio" name="q1" value="A"> No pagar intereses.</label>
+        <label><input type="radio" name="q1" value="B"> Gastar más de lo que se gana.</label>
+      </div>
+      <div class="test-question">
+        <p>2. ¿Qué representa realmente una tarjeta de crédito?</p>
+        <label><input type="radio" name="q2" value="B"> Un préstamo rotativo con intereses.</label>
+        <label><input type="radio" name="q2" value="A"> Dinero extra gratuito.</label>
+        <label><input type="radio" name="q2" value="C"> Un seguro para emergencias.</label>
+      </div>
+      <div class="test-question">
+        <p>3. ¿Qué es el apalancamiento financiero?</p>
+        <label><input type="radio" name="q3" value="A"> Usar dinero de otros para invertir o crecer.</label>
+        <label><input type="radio" name="q3" value="B"> Ahorrar antes de invertir.</label>
+        <label><input type="radio" name="q3" value="C"> Pagar deudas con préstamos.</label>
+      </div>
+      <div class="test-question">
+        <p>4. Si haces el pago mínimo en una tarjeta con 36% de interés anual:</p>
+        <label><input type="radio" name="q4" value="C"> Terminarás pagando más del doble.</label>
+        <label><input type="radio" name="q4" value="A"> No pasa nada.</label>
+        <label><input type="radio" name="q4" value="B"> El saldo baja igual.</label>
+      </div>
+      <div class="test-question">
+        <p>5. ¿Cuál es la clave para usar un préstamo estratégicamente?</p>
+        <label><input type="radio" name="q5" value="C"> Invertir en algo que genere ingresos.</label>
+        <label><input type="radio" name="q5" value="A"> Aprovechar promociones.</label>
+        <label><input type="radio" name="q5" value="B"> Usarlo para lujos personales.</label>
+      </div>
+      <button type="button" class="submit-btn" onclick="evaluarTest()">Evaluar Test</button>
+    </form>
+  </div>
 
-    <!-- INTRO/BIENVENIDA -->
-    <section class="intro-section">
-      <h2>¡Bienvenido!</h2>
-      <p>
-        En Banco Industrial queremos ayudarte a manejar mejor tu dinero. Sabemos que no siempre es fácil entender los temas financieros, por lo que hemos preparado esta capacitación con un lenguaje sencillo, ejemplos prácticos y consejos que funcionan en la vida real.
-      </p>
-      <p>
-        Queremos que más guatemaltecos puedan acceder a oportunidades de crédito, ahorro y planes que les ayuden a salir adelante. Esta capacitación está diseñada para que, aunque tengas pocos estudios, comprendas lo esencial y apliques lo aprendido. ¡Tú puedes hacer que tu dinero rinda más!
-      </p>
-    </section>
+  <div class="card" id="modulos" style="display:none;">
+    <h2>Capacitación Recomendada</h2>
+    <div class="accordion" id="accordionContent"></div>
+  </div>
+</main>
 
-    <!-- ACORDEÓN DE TEMAS PRINCIPALES -->
-    <!-- TEMA 1: QUÉ ES UN CRÉDITO -->
-    <div class="accordion" id="tema-1">
-      <div class="accordion-header">
-        <h3>1. ¿Qué es un Crédito?</h3>
-      </div>
-      <div class="accordion-content">
-        <p>
-          Un crédito es un dinero que te presta el banco con la condición de que lo devuelvas en cuotas (pagos parciales) durante un tiempo acordado, sumando intereses. Es como si alguien te ayudara con dinero ahora, pero te toca devolverlo después un poco más caro.
-        </p>
-        <p>
-          Por ejemplo, si necesitas Q5,000 para tu negocio o emergencia, el banco te los presta y tú pagas mensualmente. Si cumples, mejoras tu reputación financiera y podrás solicitar créditos más grandes o con mejores tasas.
-        </p>
-      </div>
-    </div>
+<!-- Modal -->
+<div class="modal" id="resultadoModal">
+  <div class="modal-content">
+    <h3>Resultado del Test</h3>
+    <p id="mensajeResultado"></p>
+    <button onclick="cerrarModal()">Continuar</button>
+  </div>
+</div>
 
-    <!-- TEMA 2: IMPORTANCIA DE PAGAR A TIEMPO -->
-    <div class="accordion" id="tema-2">
-      <div class="accordion-header">
-        <h3>2. Pagar a Tiempo y por qué te Conviene</h3>
-      </div>
-      <div class="accordion-content">
-        <p>
-          Cada vez que pagas puntual, el banco ve que eres una persona responsable. Esto se reflejará en tu “historial crediticio” o “score de crédito”. Con un buen historial, es más fácil que te presten para cosas más grandes: una casa, un carro, o hasta tu propia empresa.
-        </p>
-        <p>
-          Si te atrasas, la deuda crece y tu score baja. Así que procura planificar tus pagos para no pasarte de la fecha de vencimiento. Aunque sea un pequeño sacrificio, tu futuro económico te lo va a agradecer.
-        </p>
-      </div>
-    </div>
+<script>
+const respuestas = { q1: "C", q2: "B", q3: "A", q4: "C", q5: "C" };
 
-    <!-- TEMA 3: AHORRO Y FONDO DE EMERGENCIA -->
-    <div class="accordion" id="tema-3">
-      <div class="accordion-header">
-        <h3>3. Ahorro y Fondo de Emergencia</h3>
-      </div>
-      <div class="accordion-content">
-        <p>
-          A veces, ganar poco dinero nos hace creer que no podemos ahorrar. ¡Mentira! Aunque sea un 5% de tu salario, apartarlo en una cuenta de ahorro puede salvarte de imprevistos y evitar que te endeudes más.
-        </p>
-        <p>
-          Te sugerimos tener un “fondo de emergencia” para cubrir gastos inesperados, como enfermedades o reparaciones. Esto evita que tengas que pedir créditos urgentes con intereses muy altos.
-        </p>
-      </div>
-    </div>
+const temas = [
+  {
+    titulo: "Módulo 1: ¿Qué es un Crédito?",
+    contenido: "Aprende qué es un crédito, cómo se usa correctamente, y cuáles son los errores comunes que debes evitar."
+  },
+  {
+    titulo: "Módulo 2: Tarjetas de Crédito Inteligentes",
+    contenido: "Conoce cómo funcionan, cómo evitar pagar intereses y cómo usarlas estratégicamente para crear historial."
+  },
+  {
+    titulo: "Módulo 3: Apalancamiento Financiero",
+    contenido: "Domina cómo usar dinero de terceros (bancos, instituciones) para generar ingresos o crecimiento controlado."
+  },
+  {
+    titulo: "Módulo 4: Presupuesto y Planificación",
+    contenido: "Aplica el sistema 50/30/20 y otros métodos prácticos para organizar tus finanzas."
+  },
+  {
+    titulo: "Módulo 5: Fondo de Emergencias",
+    contenido: "Crea un respaldo financiero para imprevistos y mejora tu seguridad personal y familiar."
+  },
+  {
+    titulo: "Módulo 6: Score Crediticio",
+    contenido: "Descubre cómo se mide tu salud financiera y cómo mejorar tu puntuación."
+  }
+];
 
-    <!-- TEMA 4: SCORE DE CRÉDITO -->
-    <div class="accordion" id="tema-4">
-      <div class="accordion-header">
-        <h3>4. Score de Crédito: Tu Reputación con los Bancos</h3>
-      </div>
-      <div class="accordion-content">
-        <p>
-          El “score” es una nota que mide qué tan cumplido eres con tus deudas y pagos. Mientras mejor pagues, más alto tu score. Esto te abre puertas a préstamos con tasas más cómodas y te permite negociar mejores condiciones.
-        </p>
-        <p>
-          Si tu score es bajo, los bancos desconfían porque creen que podrías no pagarles. Por eso, es crucial cuidarlo pagando puntualmente y no acumulando demasiadas deudas a la vez.
-        </p>
-      </div>
-    </div>
+function evaluarTest() {
+  let score = 0;
+  for (let key in respuestas) {
+    const checked = document.querySelector(`input[name="${key}"]:checked`);
+    if (checked && checked.value === respuestas[key]) score++;
+  }
 
-    <!-- TEMA 5: PLANIFICAR TUS GASTOS -->
-    <div class="accordion" id="tema-5">
-      <div class="accordion-header">
-        <h3>5. Planifica tus Gastos y Evita Gastar de más</h3>
-      </div>
-      <div class="accordion-content">
-        <p>
-          Haz un presupuesto sencillo: divide tus ingresos en categorías (comida, transporte, estudios, entretenimiento, etc.). Así sabes dónde va tu dinero y evitas gastar de más en lo innecesario.
-        </p>
-        <p>
-          Una familia organizada es menos propensa a caer en deudas o atrasarse en pagos. Planificar te ayuda a poner límites y priorizar lo esencial (alimentación, vivienda, salud, educación).
-        </p>
-      </div>
-    </div>
+  let mensaje = "";
+  if (score === 5) {
+    mensaje = "¡Excelente! Estás listo para temas avanzados.";
+  } else if (score >= 3) {
+    mensaje = "Buen trabajo. Tienes una base sólida para seguir aprendiendo.";
+  } else {
+    mensaje = "Vamos a fortalecer tus conocimientos desde lo básico.";
+  }
 
-    <!-- TEMA 6:APOYO A PEQUEÑOS NEGOCIOS -->
-    <div class="accordion" id="tema-6">
-      <div class="accordion-header">
-        <h3>6.Una Oportunidad para Tu Negocio</h3>
-      </div>
-      <div class="accordion-content">
-        <p>
-          Las microfinanzas son créditos pequeños que pueden ayudarte a iniciar o hacer crecer un negocio local: vender comida, artesanías, ropa, etc. Son ideales para personas con pocos ingresos, ya que el banco presta montos más bajos y a plazos cómodos.
-        </p>
-        <p>
-          Con un crédito así, puedes comprar materia prima o invertir en herramientas. Siempre y cuando cumplas con los pagos, podrás acceder a montos mayores o incluso a otros productos financieros que te faciliten el crecimiento.
-        </p>
-      </div>
-    </div>
+  document.getElementById("mensajeResultado").innerText = `${mensaje} Tu puntuación: ${score}/5`;
+  document.getElementById("resultadoModal").style.display = "flex";
 
-    <!-- TEMA 7: TIPS -->
-    <div class="accordion" id="tema-7">
-      <div class="accordion-header">
-        <h3>7. Consejos Prácticos</h3>
+  mostrarModulos(score < 5); // si sacó menos de 5, muestra todos los módulos
+}
+
+function cerrarModal() {
+  document.getElementById("resultadoModal").style.display = "none";
+  document.getElementById("modulos").style.display = "block";
+}
+
+function mostrarModulos(todos = true) {
+  const container = document.getElementById("accordionContent");
+  container.innerHTML = "";
+
+  temas.forEach((tema, i) => {
+    const item = document.createElement("div");
+    item.className = "accordion-item";
+    item.innerHTML = `
+      <div class="accordion-title" onclick="toggleAccordion(this)">
+        ${tema.titulo}
       </div>
-      <div class="accordion-content">
-        <p>
-          - **Comparte gastos**: Si vives con familia, hablen de los ingresos y cómo dividir los pagos de servicios básicos.  
-          - **Usa la tecnología**: Hay apps gratuitas donde puedes anotar gastos para no perder detalle.  
-          - **Aprende de tus errores**: Si te endeudaste, no te desanimes. Habla con tu banco sobre planes de pago.
-        </p>
-        <p>
-          - **Busca descuentos locales**: En mercados o tiendas de tu barrio, aprovecha ofertas.  
-          - **Capacítate más**: Pregunta en tu municipio o en Banco Industrial si hay talleres gratuitos de finanzas.  
-          - **Sueña en grande**: Aunque ganes poco, con organización puedes lograr metas como estudiar, montar un negocio, o comprar un terrenito.
-        </p>
-      </div>
-    </div>
+      <div class="accordion-content">${tema.contenido}</div>
+    `;
+    container.appendChild(item);
+  });
+}
 
-  </main>
-
-  <script>
-    // SCRIPT PARA HACER FUNCIONAR EL ACORDEÓN
-    const accordions = document.querySelectorAll('.accordion');
-
-    accordions.forEach(acc => {
-      const header = acc.querySelector('.accordion-header');
-      header.addEventListener('click', () => {
-        // Cierra cualquier otro acordeón abierto
-        accordions.forEach(item => {
-          if (item !== acc) {
-            item.classList.remove('active');
-          }
-        });
-        // Toggle (abrir/cerrar) acordeón actual
-        acc.classList.toggle('active');
-      });
-    });
-  </script>
+function toggleAccordion(element) {
+  const content = element.nextElementSibling;
+  content.style.display = content.style.display === "block" ? "none" : "block";
+}
+</script>
 
 </body>
 </html>

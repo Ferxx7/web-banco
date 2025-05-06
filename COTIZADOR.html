@@ -3,505 +3,241 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cotizador - Banco Industrial</title>
-
-  <!-- Estilos en el mismo archivo -->
+  <title>Simulador de Préstamo - Banco Industrial</title>
   <style>
-    /* ======= RESET / GLOBAL ======= */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      scroll-behavior: smooth;
+      font-family: 'Playfair Display', serif;
     }
     body {
-      background-color: #004481; /* Fondo azul corporativo */
-      color: #333;
-      overflow-x: hidden;
+      background-color: #004481;
+      color: #fff;
     }
 
-    /* ======= LOADER ======= */
-    .loader-container {
-      position: fixed;
-      z-index: 9999;
-      top: 0; 
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #fff; /* Fondo blanco en la pantalla de carga */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column; 
-    }
-    /* Logo en loader con efecto de opacidad oscilante */
-    .loader-logo {
-      width: 150px;
-      animation: fadeInOut 2s infinite ease-in-out;
-      margin-bottom: 20px;
-    }
-    @keyframes fadeInOut {
-      0%   { opacity: 0.4; }
-      50%  { opacity: 1; }
-      100% { opacity: 0.4; }
-    }
-    /* El spinner (rueda) */
-    .loader {
-      border: 10px solid #f3f3f3;
-      border-top: 10px solid #004481;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0%   { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* ======= ENCABEZADO ======= */
-    .header-bi {
-      width: 100%;
-      background-color: #ffffff; /* Encabezado blanco */
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-    }
-    .logo-bi {
-      height: 50px;
-    }
-    .header-title {
-      font-size: 1.2rem;
-      color: #004481;
-      font-weight: 600;
-    }
-
-    /* ======= CONTENEDOR PRINCIPAL ======= */
     .container {
-      max-width: 600px;
+      max-width: 720px;
       margin: 40px auto;
-      background-color: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      color: #333;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      color: #000;
     }
-
-    .container h2 {
+    h2, h3 {
       color: #004481;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+      text-align: center;
     }
-    .container p {
-      margin-bottom: 10px;
-    }
-
-    /* ======= FORM STEPS ======= */
-    .form-step {
-      display: none; /* Ocultamos por defecto */
-    }
-    .form-step.active {
-      display: block; /* Solo el paso activo se muestra */
-    }
-
-    /* Etiquetas y campos de formulario */
     label {
       display: block;
-      margin: 8px 0 4px;
-      font-weight: 500;
+      margin: 12px 0 6px;
+      font-weight: 600;
     }
-    input[type="text"],
-    input[type="number"],
-    select {
+    input, select {
       width: 100%;
-      padding: 8px;
-      margin-bottom: 8px;
-      border-radius: 4px;
+      padding: 10px;
+      border-radius: 8px;
       border: 1px solid #ccc;
     }
-    input[type="checkbox"] {
-      margin-right: 4px;
-    }
-    .step-btns {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-
-    /* ======= BOTONES ======= */
     button {
-      background-color: #004481; 
-      color: #fff;
+      background-color: #004481;
+      color: white;
+      padding: 12px 24px;
       border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: transform 0.2s ease, background-color 0.3s ease;
       font-size: 1rem;
+      transition: 0.3s ease;
+      display: block;
+      margin: 20px auto 0;
     }
     button:hover {
-      transform: scale(1.05);
-      background-color: #0078d4; /* Celeste */
+      background-color: #0078d4;
     }
 
-    /* Botón “Aceptar” con efecto flotante sutil continuo */
-    .accept-btn {
-      animation: floatBtn 2s infinite ease-in-out;
-      display: block;
-      margin: 10px auto 0 auto; /* Centrar */
+    .slider-container {
+      margin: 20px 0;
     }
-    @keyframes floatBtn {
-      0%   { transform: translateY(0px); }
-      50%  { transform: translateY(-3px); }
-      100% { transform: translateY(0px); }
+    .slider {
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: #ccc;
+      outline: none;
+    }
+    .slider::-webkit-slider-thumb {
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      background: #004481;
+      cursor: pointer;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      animation: blink 1s infinite alternate;
     }
 
-    /* Mensaje de cuota */
-    .cotizacion-result {
-      background-color: #f3f3f3;
-      padding: 15px;
-      border-radius: 4px;
-      margin-top: 15px;
+    @keyframes blink {
+      0% { box-shadow: 0 0 6px #004481; }
+      100% { box-shadow: 0 0 15px #004481; }
+    }
+
+    .display-box {
+      font-size: 1.6rem;
+      font-family: 'Playfair Display', serif;
+      background: rgba(200, 200, 200, 0.4);
+      color: #000;
+      padding: 14px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .highlight {
       font-weight: bold;
+      background-color: #e6f2ff;
+    }
+    .aviso {
+      color: red;
+      font-size: 0.95rem;
+      margin-top: 10px;
+      text-align: center;
     }
 
-    /* ======= RESPONSIVE ======= */
-    @media (max-width: 600px) {
-      .header-title {
-        font-size: 1rem;
-      }
-      .container {
-        margin: 20px;
-      }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      padding: 12px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .header img {
+      height: 52px;
+    }
+    .back-btn {
+      background-color: #0078d4;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- LOADER de 4 segundos -->
-  <div class="loader-container" id="loader">
-    <img src="img/LOGOBI.svg" alt="Logo Banco Industrial" class="loader-logo">
-    <div class="loader"></div>
+<div class="header">
+  <img src="img/LOGOBI.svg" alt="Logo Banco Industrial" />
+  <button class="back-btn" onclick="window.location.href='index.html'">⬅ Volver al Inicio</button>
+</div>
+
+<div class="container">
+  <label for="nit">Número de NIT</label>
+  <input type="text" id="nit" placeholder="Ej. 1234567-8" required/>
+
+  <label for="salario">Salario Mensual (GTQ)</label>
+  <div class="display-box" id="salarioDisplay">Q6000</div>
+  <input type="range" id="salario" min="3000" max="100000" step="500" value="6000" class="slider"/>
+
+  <label for="empresa">Empresa donde trabaja</label>
+  <input type="text" id="empresa" placeholder="Nombre de la empresa"/>
+
+  <label>¿Le pagan con planilla BI?</label>
+  <select id="planilla">
+    <option value="">Seleccione...</option>
+    <option value="Sí">Sí</option>
+    <option value="No">No</option>
+  </select>
+
+  <div class="slider-container">
+    <label>Monto Deseado (GTQ)</label>
+    <div class="display-box" id="montoDisplay">Q25000</div>
+    <input type="range" id="monto" class="slider" min="5000" max="100000" step="500" value="25000"/>
   </div>
 
-  <!-- ENCABEZADO -->
-  <header class="header-bi">
-    <img src="img/LOGOBI.svg" alt="Logo Banco Industrial" class="logo-bi">
-    <h1 class="header-title">Cotizador de Préstamos</h1>
-  </header>
+  <button id="calcular">Calcular Proyección</button>
 
-  <!-- CONTENEDOR PRINCIPAL -->
-  <div class="container">
-    
-    <!-- FORM STEP 1 -->
-    <div class="form-step active" id="step1">
-      <h2>Datos Personales</h2>
-      <label for="dpi">Número de DPI</label>
-      <input type="text" id="dpi" placeholder="Ej. 1234 56789 0101" />
-
-      <label for="salario">Salario Mensual (GTQ)</label>
-      <input type="number" id="salario" placeholder="Ej. 5000" />
-
-      <label for="estabilidad">Estabilidad Laboral</label>
-      <select id="estabilidad">
-        <option value="">Seleccione...</option>
-        <option value="menor1">Menos de 1 año</option>
-        <option value="1-3">De 1 a 3 años</option>
-        <option value="mayor3">Más de 3 años</option>
-      </select>
-
-      <!-- NUEVO: Lista de empresas -->
-      <label for="empresa">Empresa</label>
-      <select id="empresa">
-        <option value="">Seleccione su empresa...</option>
-        <option value="26 - PROCRETO S.A.">26 - PROCRETO S.A.</option>
-        <option value="41 - ISERTEC S.A.">41 - ISERTEC S.A.</option>
-        <option value="59 - VINICOLA CENTROAMERICANA">59 - VINICOLA CENTROAMERICANA</option>
-        <option value="81 - Spectrum, S.A.">81 - Spectrum, S.A.</option>
-        <option value="91 - Laboratorio y Droguería Donovan Werke">91 - Laboratorio y Droguería Donovan Werke</option>
-        <option value="92 - Industria Panificadora">92 - Industria Panificadora</option>
-        <option value="93 - Ediciones don Quijote, S.A.">93 - Ediciones don Quijote, S.A.</option>
-        <option value="107 - Neon Neto División Arquitectónica">107 - Neon Neto División Arquitectónica</option>
-        <option value="111 - Mayaprin, S.A.">111 - Mayaprin, S.A.</option>
-        <option value="112 - Turvisa">112 - Turvisa</option>
-        <option value="116 - Colecciones de Santa, S.A.">116 - Colecciones de Santa, S.A.</option>
-        <option value="22 - Advance Business Services">22 - Advance Business Services</option>
-        <option value="145 - La Casa de las Baterías">145 - La Casa de las Baterías</option>
-        <option value="163 - Expogranel">163 - Expogranel</option>
-        <option value="169 - Vigilancia y Seguridad Empresarial, S.A. / Visegua">169 - Vigilancia y Seguridad Empresarial, S.A. / Visegua</option>
-        <option value="170 - Construcciones Nabla, S.A.">170 - Construcciones Nabla, S.A.</option>
-        <option value="178 - GBM de Guatemala, S.A.">178 - GBM de Guatemala, S.A.</option>
-        <option value="183 - Arabela Guatemala, S.A.">183 - Arabela Guatemala, S.A.</option>
-        <option value="192 - Bombeo Automático de Centroamérica">192 - Bombeo Automático de Centroamérica</option>
-        <option value="201 - EMPRESA IRON LOGISTICS, S.A. / WORLD LOGISTICS, S.A.">201 - EMPRESA IRON LOGISTICS, S.A. / WORLD LOGISTICS, S.A.</option>
-        <option value="202 - PUNTO NARANJA, DESTECO, S.A.">202 - PUNTO NARANJA, DESTECO, S.A.</option>
-        <option value="211 - Universal Química S.A.">211 - Universal Química S.A.</option>
-        <option value="213 - Unilever de Centroamérica S.A.">213 - Unilever de Centroamérica S.A.</option>
-        <option value="217 - CLÍNICA ESPECIALIZADA DE DIAGNÓSTICO PROFESIONAL, S.A.">217 - CLÍNICA ESPECIALIZADA DE DIAGNÓSTICO PROFESIONAL, S.A.</option>
-        <option value="224 - Compañía Interamericana de Comercio, S.A.">224 - Compañía Interamericana de Comercio, S.A.</option>
-        <option value="238 - Hospital Cristiano de Guatemala">238 - Hospital Cristiano de Guatemala</option>
-        <option value="278 - Segrasa, S.A.">278 - Segrasa, S.A.</option>
-        <option value="280 - Fersuc">280 - Fersuc</option>
-        <option value="285 - INDUSTRIAS DEL CASTILLO, S.A.">285 - INDUSTRIAS DEL CASTILLO, S.A.</option>
-        <option value="295 - Industria Tapicera, S.A.">295 - Industria Tapicera, S.A.</option>
-        <option value="296 - Condor, S.A.">296 - Condor, S.A.</option>
-        <option value="298 - Can Am Centro América">298 - Can Am Centro América</option>
-        <option value="314 - Litografía Lainsa">314 - Litografía Lainsa</option>
-        <option value="318 - Metal Gráfica">318 - Metal Gráfica</option>
-        <option value="326 - UNIVERSIDAD DA VINCI">326 - UNIVERSIDAD DA VINCI</option>
-        <option value="336 - Aromas Creativos">336 - Aromas Creativos</option>
-        <option value="351 - Programa Moscamed">351 - Programa Moscamed</option>
-        <option value="356 - Celasa">356 - Celasa</option>
-        <option value="366 - Fenestración, S.A.">366 - Fenestración, S.A.</option>
-        <option value="368 - Innova Outsourcing">368 - Innova Outsourcing</option>
-        <option value="371 - Electronic Shop, S.A.">371 - Electronic Shop, S.A.</option>
-        <option value="372 - Operagro">372 - Operagro</option>
-        <option value="373 - Transportadora y Talleres, S.A.">373 - Transportadora y Talleres, S.A.</option>
-        <option value="374 - Grupo Elfra, S.A.">374 - Grupo Elfra, S.A.</option>
-        <option value="379 - Asian Tropics, S.A.">379 - Asian Tropics, S.A.</option>
-        <option value="392 - BDG, S.A. / SERVICIOS DE TECNOLOGÍA">392 - BDG, S.A. / SERVICIOS DE TECNOLOGÍA</option>
-        <option value="395 - Alimentos Pura Delicia, S.A.">395 - Alimentos Pura Delicia, S.A.</option>
-        <option value="397 - Montano College">397 - Montano College</option>
-        <option value="401 - Nexo Logistics">401 - Nexo Logistics</option>
-        <option value="402 - Centro Comercial Montserrat">402 - Centro Comercial Montserrat</option>
-        <option value="407 - ET Publicidad, S.A.">407 - ET Publicidad, S.A.</option>
-        <option value="410 - Los Canarios, S.A.">410 - Los Canarios, S.A.</option>
-        <option value="414 - Transportes Monroy Zuñiga">414 - Transportes Monroy Zuñiga</option>
-        <option value="415 - Óptica Montserrat">415 - Óptica Montserrat</option>
-        <option value="416 - Medivision">416 - Medivision</option>
-        <option value="420 - Tecnocreto, S.A.">420 - Tecnocreto, S.A.</option>
-        <option value="423 - Vitatrac">423 - Vitatrac</option>
-        <option value="431 - Bienes y Raíces Cayalá, S.A.">431 - Bienes y Raíces Cayalá, S.A.</option>
-        <option value="432 - Full Products Centroamérica, S.A.">432 - Full Products Centroamérica, S.A.</option>
-        <option value="435 - REPUESTOS AUTO TOTAL, S.A. / AUTOPRO">435 - REPUESTOS AUTO TOTAL, S.A. / AUTOPRO</option>
-        <option value="449 - Comeragua, S.A.">449 - Comeragua, S.A.</option>
-        <option value="454 - Comercialización y Servicios los Cuatro, S.A.">454 - Comercialización y Servicios los Cuatro, S.A.</option>
-        <option value="461 - Inmobiliaria el Quijote, S.A.">461 - Inmobiliaria el Quijote, S.A.</option>
-        <option value="464 - Blue Medical, S.A.">464 - Blue Medical, S.A.</option>
-        <option value="474 - Calera San Miguel, S.A.">474 - Calera San Miguel, S.A.</option>
-        <option value="475 - Cerámicos y Estilos, S.A.">475 - Cerámicos y Estilos, S.A.</option>
-        <option value="486 - Diarios Modernos">486 - Diarios Modernos</option>
-        <option value="493 - Grupo Creative">493 - Grupo Creative</option>
-        <option value="502 - Grupo CNM">502 - Grupo CNM</option>
-        <option value="504 - Grupo Diamante, S.A.">504 - Grupo Diamante, S.A.</option>
-        <option value="506 - 7 Caldos">506 - 7 Caldos</option>
-        <option value="507 - Parroquia la Divina Providencia Salesianos de Don Bosco">507 - Parroquia la Divina Providencia Salesianos de Don Bosco</option>
-        <option value="511 - Fábrica de Envases de Hojalata Layta, S.A.">511 - Fábrica de Envases de Hojalata Layta, S.A.</option>
-        <option value="514 - Intellego Learning Center">514 - Intellego Learning Center</option>
-        <option value="517 - Nils Pira">517 - Nils Pira</option>
-        <option value="520 - La Hora, S.A.">520 - La Hora, S.A.</option>
-        <option value="521 - Hashtag Guatemala, S.A.">521 - Hashtag Guatemala, S.A.</option>
-        <option value="523 - Ac Talentos, S.A.">523 - Ac Talentos, S.A.</option>
-        <option value="524 - REDDCOM">524 - REDDCOM</option>
-        <option value="525 - Aeroclub de Guatemala">525 - Aeroclub de Guatemala</option>
-        <option value="526 - Sistema Montano, S.A.">526 - Sistema Montano, S.A.</option>
-        <option value="532 - CENDIS">532 - CENDIS</option>
-        <option value="535 - Chemical Products And Technical Services, S.A.">535 - Chemical Products And Technical Services, S.A.</option>
-        <option value="539 - Grupo Imade">539 - Grupo Imade</option>
-        <option value="551 - Restaurantes Lai Lai Guatemala">551 - Restaurantes Lai Lai Guatemala</option>
-        <option value="553 - C Market, S.A.">553 - C Market, S.A.</option>
-        <option value="565 - Startrack, S.A.">565 - Startrack, S.A.</option>
-        <option value="566 - Distribuidora la Cadena">566 - Distribuidora la Cadena</option>
-        <option value="568 - Pasajanik">568 - Pasajanik</option>
-        <option value="570 - AIDA Restaurante">570 - AIDA Restaurante</option>
-        <option value="587 - Universidad San Pablo de Guatemala">587 - Universidad San Pablo de Guatemala</option>
-        <option value="592 - Industria de Hamburguesas">592 - Industria de Hamburguesas</option>
-        <option value="594 - Cargo Expreso, S.A.">594 - Cargo Expreso, S.A.</option>
-        <option value="601 - Vallas y Gigantografías de Guatemala, S.A.">601 - Vallas y Gigantografías de Guatemala, S.A.</option>
-        <option value="613 - Corporación Fridas">613 - Corporación Fridas</option>
-        <option value="615 - Fábrica de Plásticos Extrudoplast, S.A.">615 - Fábrica de Plásticos Extrudoplast, S.A.</option>
-        <option value="616 - World Connection">616 - World Connection</option>
-        <option value="622 - El Castor, S.A.">622 - El Castor, S.A.</option>
-        <option value="629 - Aluma Systems Guatemala, S.A.">629 - Aluma Systems Guatemala, S.A.</option>
-        <option value="631 - Rotoprin">631 - Rotoprin</option>
-        <option value="632 - Trinomed Internacional, S.A.">632 - Trinomed Internacional, S.A.</option>
-        <option value="634 - Items Industriales, S.A.">634 - Items Industriales, S.A.</option>
-        <option value="647 - Alimentos Campestres, S.A.">647 - Alimentos Campestres, S.A.</option>
-        <option value="650 - FAREI, S.A.">650 - FAREI, S.A.</option>
-        <option value="653 - SUBE, S.A.">653 - SUBE, S.A.</option>
-        <option value="659 - Lavanderías, S.A.">659 - Lavanderías, S.A.</option>
-        <option value="668 - V & M Printing, S.A.">668 - V & M Printing, S.A.</option>
-        <option value="673 - Novocolor, S.A.">673 - Novocolor, S.A.</option>
-        <option value="675 - Management & Impartition, S.A.">675 - Management & Impartition, S.A.</option>
-        <option value="677 - Multifilm, S.A.">677 - Multifilm, S.A.</option>
-        <option value="679 - Columbus Fashion">679 - Columbus Fashion</option>
-        <option value="683 - Prointel Corredor de Seguros, S.A.">683 - Prointel Corredor de Seguros, S.A.</option>
-        <option value="707 - Grupo A.P, S.A.">707 - Grupo A.P, S.A.</option>
-        <option value="717 - Perfiles y Soluciones Logísticas Guatemala, S.A.">717 - Perfiles y Soluciones Logísticas Guatemala, S.A.</option>
-        <option value="722 - Helados de Centroamérica, S.A.">722 - Helados de Centroamérica, S.A.</option>
-        <option value="724 - Ciencia y Arte">724 - Ciencia y Arte</option>
-        <option value="725 - Tecniseguros">725 - Tecniseguros</option>
-        <option value="741 - BPO INNOVATIONS">741 - BPO INNOVATIONS</option>
-        <option value="745 - Imagen Visible, S.A.">745 - Imagen Visible, S.A.</option>
-        <option value="748 - Salvatierra Álvarez y Asociados, S.C.">748 - Salvatierra Álvarez y Asociados, S.C.</option>
-        <option value="749 - Grupo Los Tres">749 - Grupo Los Tres</option>
-        <option value="752 - Operadores Virtuales de Centro América, S.A.">752 - Operadores Virtuales de Centro América, S.A.</option>
-        <option value="754 - Modelo Integrado de Construcción y Arquitectura, S.A.">754 - Modelo Integrado de Construcción y Arquitectura, S.A.</option>
-        <option value="771 - Plasticentro">771 - Plasticentro</option>
-        <option value="778 - LA BARATA">778 - LA BARATA</option>
-        <option value="781 - Ecofiltro, S.A.">781 - Ecofiltro, S.A.</option>
-      </select>
-
-      <label>
-        <input type="checkbox" id="deudas" />
-        Actualmente tengo otras deudas
-      </label>
-
-      <div class="step-btns">
-        <div></div> <!-- Espacio en blanco para alinear a la derecha el botón -->
-        <button id="btnNext1">Siguiente</button>
-      </div>
-    </div>
-
-    <!-- FORM STEP 2 -->
-    <div class="form-step" id="step2">
-      <h2>Monto y Plazo</h2>
-      <p>Ingrese el monto que desea solicitar y seleccione el plazo para calcular una cuota aproximada (1 a 5 años).</p>
-
-      <label for="monto">Monto Deseado (GTQ)</label>
-      <input type="number" id="monto" placeholder="Ej. 20000" />
-
-      <label for="plazo">Plazo</label>
-      <select id="plazo">
-        <option value="">Seleccione...</option>
-        <option value="12">12 meses (1 año)</option>
-        <option value="24">24 meses (2 años)</option>
-        <option value="36">36 meses (3 años)</option>
-        <option value="48">48 meses (4 años)</option>
-        <option value="60">60 meses (5 años)</option>
-      </select>
-
-      <div class="cotizacion-result" id="cotizacionResult" style="display:none;">
-        <!-- Se mostrará aquí la cuota aproximada -->
-      </div>
-
-      <div class="step-btns">
-        <button id="btnBack2">Regresar</button>
-        <button id="btnCalculate">Calcular</button>
-      </div>
-      
-      <!-- Botón ACEPTAR, inicialmente oculto hasta calcular la cuota -->
-      <button class="accept-btn" id="btnAccept" style="display:none;">
-        Aceptar
-      </button>
-    </div>
-
+  <div id="resultado" style="display:none;">
+    <h3>Proyección de Cuotas Mensuales</h3>
+    <div class="aviso">* La cuota es un aproximado. Un ejecutivo le confirmará el valor real.</div>
+    <table>
+      <thead>
+        <tr><th>Plazo (años)</th><th>Cuota Aproximada (GTQ)</th></tr>
+      </thead>
+      <tbody id="tablaCuotas"></tbody>
+    </table>
+    <button id="contactar">Contactar Ejecutivo</button>
   </div>
+</div>
 
-  <!-- SCRIPT EN EL MISMO ARCHIVO -->
-  <script>
-    // ================== LOADER ================== //
-    const loader = document.getElementById('loader');
-    setTimeout(() => {
-      loader.style.display = 'none';
-    }, 4000); // Forzamos 4 segundos de loader
+<script>
+const nitInput = document.getElementById('nit');
+const salarioInput = document.getElementById('salario');
+const montoInput = document.getElementById('monto');
+const salarioDisplay = document.getElementById('salarioDisplay');
+const montoDisplay = document.getElementById('montoDisplay');
 
-    // ================== FORM VARIABLES ================== //
-    const step1 = document.getElementById('step1');
-    const step2 = document.getElementById('step2');
+salarioInput.addEventListener('input', () => {
+  salarioDisplay.textContent = `Q${salarioInput.value}`;
+});
 
-    const btnNext1 = document.getElementById('btnNext1');
-    const btnBack2 = document.getElementById('btnBack2');
-    const btnCalculate = document.getElementById('btnCalculate');
-    const btnAccept = document.getElementById('btnAccept');
-    const cotizacionResult = document.getElementById('cotizacionResult');
+montoInput.addEventListener('input', () => {
+  montoDisplay.textContent = `Q${montoInput.value}`;
+});
 
-    // Datos Step 1
-    const dpiInput = document.getElementById('dpi');
-    const salarioInput = document.getElementById('salario');
-    const estabilidadSelect = document.getElementById('estabilidad');
-    const empresaSelect = document.getElementById('empresa');
-    const deudasCheck = document.getElementById('deudas');
+const calcularBtn = document.getElementById('calcular');
+calcularBtn.addEventListener('click', () => {
+  const nit = nitInput.value.trim();
+  if (!nit) {
+    alert('Por favor ingrese su NIT para continuar.');
+    return;
+  }
 
-    // Datos Step 2
-    const montoInput = document.getElementById('monto');
-    const plazoSelect = document.getElementById('plazo');
+  const monto = parseFloat(montoInput.value);
+  const tasaMensual = 0.17 / 12;
+  let tabla = '';
 
-    // ================== EVENTOS ================== //
+  for (let i = 5; i >= 1; i--) {
+    const meses = i * 12;
+    const cuota = (tasaMensual * monto) / (1 - Math.pow(1 + tasaMensual, -meses));
+    const rowClass = i === 5 ? 'highlight' : '';
+    tabla += `<tr class="${rowClass}"><td>${i}</td><td>Q${cuota.toFixed(2)}</td></tr>`;
+  }
 
-    // Avanzar a Step 2
-    btnNext1.addEventListener('click', () => {
-      // Validar campos básicos del Step 1
-      if (
-        !dpiInput.value.trim() ||
-        !salarioInput.value ||
-        !estabilidadSelect.value ||
-        !empresaSelect.value
-      ) {
-        alert('Por favor, complete todos los datos requeridos (DPI, Salario, Estabilidad, Empresa).');
-        return;
-      }
-      step1.classList.remove('active');
-      step2.classList.add('active');
-    });
+  document.getElementById('tablaCuotas').innerHTML = tabla;
+  document.getElementById('resultado').style.display = 'block';
+});
 
-    // Regresar a Step 1
-    btnBack2.addEventListener('click', () => {
-      step2.classList.remove('active');
-      step1.classList.add('active');
-    });
+const contactarBtn = document.getElementById('contactar');
+contactarBtn.addEventListener('click', () => {
+  const nit = nitInput.value;
+  const salario = salarioInput.value;
+  const empresa = document.getElementById('empresa').value;
+  const planilla = document.getElementById('planilla').value;
+  const monto = montoInput.value;
 
-    // Calcular cuota
-    btnCalculate.addEventListener('click', () => {
-      const monto = parseFloat(montoInput.value);
-      const plazo = parseInt(plazoSelect.value);
-      
-      if (!monto || !plazo || monto <= 0) {
-        alert('Ingrese un monto válido y seleccione un plazo (1 a 5 años).');
-        return;
-      }
+  const mensaje = encodeURIComponent(`NIT: ${nit}\nSalario: Q${salario}\nEmpresa: ${empresa}\nPlanilla BI: ${planilla}\nMonto solicitado: Q${monto}`);
+  window.open(`https://wa.me/50231663430?text=${mensaje}`, '_blank');
+});
+</script>
 
-      // Tasa 17% anual => 17/12 ≈ 1.4167% mensual
-      const interesMensual = 0.17 / 12; // 17% / 12
-      // Fórmula estándar de amortización mensual:
-      // cuota = (r * P) / [1 - (1+r)^(-n)]
-      // P = monto, r = interés mensual, n = plazo (meses)
-      const cuota = (interesMensual * monto) / (1 - Math.pow(1 + interesMensual, -plazo));
-
-      const cuotaAprox = cuota.toFixed(2);
-      cotizacionResult.style.display = 'block';
-      cotizacionResult.innerHTML = `
-        Cuota Mensual Aproximada: Q${cuotaAprox}<br>
-        <small>Esta cifra es estimada. No incluye seguros u otros cargos.</small>
-      `;
-
-      // Mostramos botón Aceptar
-      btnAccept.style.display = 'block';
-    });
-
-    // Botón Aceptar => WhatsApp
-    btnAccept.addEventListener('click', () => {
-      // Extraemos datos ingresados
-      const dpiVal = dpiInput.value.trim();
-      const salarioVal = salarioInput.value.trim();
-      const estabilidadVal = estabilidadSelect.value;
-      const empresaVal = empresaSelect.value;
-      const deudasVal = deudasCheck.checked ? 'Sí' : 'No';
-      const montoVal = montoInput.value.trim();
-      const plazoVal = plazoSelect.value;
-      
-      // Tomamos la parte numérica de la cuota con RegEx
-      const cuotaText = cotizacionResult.textContent.match(/Q([\d.]+)/);
-      const cuotaVal = cuotaText ? cuotaText[1] : '0.00';
-
-      // Creamos el mensaje a enviar por WhatsApp
-      const mensaje = encodeURIComponent(
-        `¡Hola! Deseo más información sobre el préstamo.\n\n`+
-        `- DPI: ${dpiVal}\n`+
-        `- Salario: Q${salarioVal}\n`+
-        `- Estabilidad Laboral: ${estabilidadVal}\n`+
-        `- Empresa: ${empresaVal}\n`+
-        `- ¿Tiene deudas?: ${deudasVal}\n`+
-        `- Monto Deseado: Q${montoVal}\n`+
-        `- Plazo: ${plazoVal} meses\n\n`+
-        `Realicé un cálculo aproximado y mi cuota podría rondar los Q${cuotaVal}.\n`+
-        `Por favor, necesito que un Ejecutivo especializado me confirme la cotización completa.`
-      );
-
-      // Abrir WhatsApp con el mensaje
-      window.open(`https://wa.me/50231663430?text=${mensaje}`, '_blank');
-    });
-  </script>
 </body>
 </html>
